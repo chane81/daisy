@@ -1,0 +1,74 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-eslint-rules",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "member-ordering": false,
+    "object-literal-key-quotes": [false, "as-needed"],
+    "jsx-boolean-value": false,
+    "semicolon": false,
+    "strict-type-predicates": false,
+    "trailing-comma": false,
+    "no-consecutive-blank-lines": true,
+    "indent": [true, "tabs"],
+    "jsx-wrap-multiline": false,
+     "quotemark": [true, "single", "jsx-single", "avoid-escape"],
+    "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false,
+    "max-line-length": false,
+    "no-console": false,
+    "no-object-literal-type-assertion": false,
+    "no-submodule-imports": [
+      false,
+      "next"
+    ],
+    "space-before-function-paren": false,
+    "ter-indent": [true, "tab"],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "space",
+        "index-signature": "space",
+        "parameter": "space",
+        "property-declaration": "space",
+        "variable-declaration": "space"
+      }
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-module",
+      "check-preblock",
+      "check-rest-spread",
+      "check-separator",
+      "check-type",
+      "check-typecast",
+      "check-type-operator",
+      "check-preblock"
+    ]
+  },
+  "linterOptions": {
+    "exclude": [
+      "bin",
+      "config.js",
+      "tsconfig.json",
+      "next.config.js",
+      "*.js",
+      "*.scss",
+      "*.css",
+      "**/__tests__/**/*"
+    ]
+  }
+}
