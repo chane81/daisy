@@ -15,7 +15,7 @@ class Index extends Component<IProps> {
 	public render() {
 		return (
 			<div>
-				<Head title='My Chat App' />
+				<Head title='Daisy Music App' />
 			</div>
 		);
 	}
