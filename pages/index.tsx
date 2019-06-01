@@ -1,22 +1,18 @@
 import { inject, observer } from 'mobx-react';
 import { Component } from 'react';
-import Head from '../components/Head';
+import AlbumList from '../components/album/AlbumList';
+import Master from '../components/layout/Master';
 
 interface IProps {
 	store?: any;
 }
 
 class Index extends Component<IProps> {
-	public componentWillUnmount() {
-		const { store: { socketModel } } = this.props;
-		socketModel.setSocketClose();
-	}
-
 	public render() {
 		return (
-			<div>
-				<Head title='Daisy Music App' />
-			</div>
+			<Master>
+				<AlbumList />
+			</Master>
 		);
 	}
 }

@@ -1,8 +1,10 @@
+const webpack = require('webpack')
 const withCSS = require('@zeit/next-css')
 const withSass = require('@zeit/next-sass')
 const withTypescript = require('@zeit/next-typescript')
 const path = require('path')
 const dotEnv = require('dotenv-webpack')
+const env = require('./config/env')();
 
 module.exports = 
 withTypescript(
@@ -16,11 +18,7 @@ withTypescript(
           config.plugins = [
             ...config.plugins,
 
-            // .env 관련 설정
-            new dotEnv({
-              path: path.join(__dirname, '.env'),
-              systemvars: true
-            })
+            new webpack.DefinePlugin(env.stringified)
           ];
 
           config.entry = async () => {

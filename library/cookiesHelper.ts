@@ -13,7 +13,10 @@ class Payload {
 
 // 쿠키굽기, 쿠키종료 디폴트시간(6시간)
 const setCookie = (payload: Payload): void => {
-	cookies.set(payload.key, payload.value, { path: '/', expires: defaultExpireHour });
+	cookies.set(payload.key, payload.value, {
+		path: '/',
+		expires: defaultExpireHour
+	});
 };
 
 // 쿠키굽기, 쿠키종료 일단위
