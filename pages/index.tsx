@@ -1,6 +1,6 @@
 import { inject, observer } from 'mobx-react';
+import Link from 'next/link';
 import { Component } from 'react';
-import AlbumList from '../components/album/AlbumList';
 import Master from '../components/layout/Master';
 
 interface IProps {
@@ -11,7 +11,15 @@ class Index extends Component<IProps> {
 	public render() {
 		return (
 			<Master>
-				<AlbumList />
+				<Link href='/artist-list'>
+					<a style={{ display: 'block' }}>가수별 리스트</a>
+				</Link>
+				<Link href='/album-list'>
+					<a style={{ display: 'block' }}>앨범 리스트</a>
+				</Link>
+				<Link href='/top-rank-list'>
+					<a style={{ display: 'block' }}>탑100 리스트</a>
+				</Link>
 			</Master>
 		);
 	}
