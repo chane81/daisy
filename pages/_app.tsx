@@ -5,7 +5,7 @@ import { NextComponentType } from 'next';
 import App, { Container } from 'next/app';
 import { object } from 'prop-types';
 import React from 'react';
-import Head from '../components/layout/Head';
+import Head from '../components/Layout/Head';
 import { initializeStore, IStore } from '../stores/store';
 
 interface IProps {
