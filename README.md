@@ -52,10 +52,28 @@
     }
   ```
 
-# ``testing 관련`
+# `testing 관련`
 - ## jest + enzyme 사용
   - yarn 설치
     ```
       yarn add jest jest-dom enzyme enzyme-adapter-react-16 @types/enzyme @types/enzyme-adapter-react-16 @types/jest --dev
     ```
   - package.json 에 jest 관련 설정 추가
+
+
+# `style 사용방식 참고`
+- ## styled component
+  - yarn
+    ```
+      // sass 쓰기 위해 node-sass 추가
+      yarn add node-sass
+
+      // 스타일 컴포넌트 패키지 추가
+      yarn add styled-components
+      yarn add babel-plugin-styled-components @types/styled-components --dev
+    ```
+
+  - .babelrc
+    ```json
+      "plugins": [["styled-components", { "ssr": true }]]
+    ```
