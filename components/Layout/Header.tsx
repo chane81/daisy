@@ -20,13 +20,15 @@ const HeaderWrapper = styled.div`
 	.search-area {
 		width: 85%;
 		text-align: right;
+		min-width: 18em;
 
 		input {
 			border: solid 1px #dee2e6;
 			border-right: none;
 			border-radius: 10px 0 0 10px;
 			line-height: 2rem;
-			width: 300px;
+			width: 60%;
+			min-width: 11.5em;
 			text-align: center;
 		}
 
@@ -55,7 +57,7 @@ const Header: React.FC<IProps> = props => {
 				<input
 					className='search-box'
 					type='text'
-					placeholder='검색할 노래/가수를 입력해 주세요.'
+					placeholder='노래/가수를 검색해주세요.'
 				/>
 				<div className='search-icon'>
 					<i className='fas fa-search' />
