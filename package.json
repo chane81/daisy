@@ -58,14 +58,15 @@
 		"enzyme-adapter-react-16": "^1.14.0",
 		"jest": "^24.8.0",
 		"jest-dom": "^3.4.0",
-		"tslint": "^5.13.1",
-		"tslint-config-prettier": "^1.18.0",
-		"tslint-config-standard": "^8.0.1",
-		"tslint-loader": "^3.5.4",
-		"tslint-react": "^3.6.0"
+		"prettier-tslint": "^0.4.2",
+		"tslint": "^5.17.0",
+		"tslint-config-prettier": "^1.18.0"
 	},
 	"babel": {
-		"presets": [ "next/babel", "@zeit/next-typescript/babel" ],
+		"presets": [
+			"next/babel",
+			"@zeit/next-typescript/babel"
+		],
 		"plugins": [
 			[
 				"@babel/plugin-proposal-decorators",
@@ -91,7 +92,11 @@
 	},
 	"jest": {
 		"verbose": true,
-		"moduleFileExtensions": [ "ts", "tsx", "js" ],
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js"
+		],
 		"globals": {
 			"ts-jest": {
 				"babelConfig": true
@@ -101,8 +106,13 @@
 			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/mocks.js",
 			"\\.(css|less|scss)$": "<rootDir>/__mocks__/mocks.js"
 		},
-		"testPathIgnorePatterns": [ "<rootDir>/.next/", "<rootDir>/node_modules/" ],
+		"testPathIgnorePatterns": [
+			"<rootDir>/.next/",
+			"<rootDir>/node_modules/"
+		],
 		"snapshotResolver": "<rootDir>/config/snapshotResolver.js",
-		"setupFiles": [ "<rootDir>/config/jest.setup.js" ]
+		"setupFiles": [
+			"<rootDir>/config/jest.setup.js"
+		]
 	}
 }
