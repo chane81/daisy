@@ -50,7 +50,7 @@ const HeaderWrapper = styled.div`
 const Header: React.FC<IProps> = props => {
 	return (
 		<HeaderWrapper {...props}>
-			<Navbar btnTextName='DAISY' />
+			<Navbar btnTextName='DAISY' btnKind='A' />
 			<div className='search-area'>
 				<input
 					className='search-box'
