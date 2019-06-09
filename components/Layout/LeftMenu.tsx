@@ -18,7 +18,7 @@ const LeftMenuWrapper = styled('div')`
 
 	border-right: 1px solid #868e96;
 	border-bottom: 1px solid #868e96;
-	width: 200px;
+	min-width: 11.4em;
 `;
 
 const LeftMenu: React.FC<IProps> = props => (
