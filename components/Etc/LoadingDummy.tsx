@@ -1,9 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+/**
+ * 설명:						로딩 스피너 컴포넌트, 스타일드 컴포넌트의 다른 사용방법 예시임
+ * className:				css class 명
+ * isBgShow: 				로딩 백그라운드 레이어 표시할 것인가 true/false
+ */
 interface IProps {
-	isBgShow?: boolean;
 	className?: string;
+	isBgShow?: boolean;
 }
 
 const Loading: React.FC<IProps> = props => {
