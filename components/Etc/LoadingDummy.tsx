@@ -2,11 +2,21 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 interface IProps {
-	isBgShow: boolean;
+	isBgShow?: boolean;
 	className?: string;
 }
 
-const LoadingWrapper = styled('div')<IProps>`
+const Loading: React.FC<IProps> = props => {
+	console.log(props.isBgShow);
+
+	return (
+		<div className={props.className}>
+			<i className='fas fa-circle-notch fa-spin fa-4x' />
+		</div>
+	);
+};
+
+const LoadingWrapper = styled(Loading)`
 	position: absolute;
 	display: flex;
 	justify-content: center;
@@ -24,12 +34,4 @@ const LoadingWrapper = styled('div')<IProps>`
 		`};
 `;
 
-const Loading: React.FC<IProps> = (props: IProps) => {
-	return (
-		<LoadingWrapper {...props}>
-			<i className='fas fa-circle-notch fa-spin fa-4x' />
-		</LoadingWrapper>
-	);
-};
-
-export default Loading;
+export default LoadingWrapper;
