@@ -42,8 +42,11 @@
   - 페이지 변경간 레이아웃유지
   - 페이지 탐색시 상태유지
   - `componentDidCatch()`를 사용한 사용자 정의 오류 처리
+
     > componentDidCatch() 는 React.js 16 버전에서 추가된 것으로 컴포넌트가 렌더링 되는 도중 런타임 에러가 발생하면 호출되는 콜백 함수
+
     > 참고 문서: https://ko.reactjs.org/docs/react-component.html
+
   - 페이지에 추가적인 데이터 주입(예: GraphQL 쿼리 처리)
 
 - ## \_document.js
