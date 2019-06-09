@@ -23,7 +23,7 @@ const LeftMenuWrapper = styled('div')`
 
 const LeftMenu: React.FC<IProps> = props => (
 	<LeftMenuWrapper {...props}>
-		<Navbar btnTextName='DAISY' />
+		<Navbar btnTextName='DAISY' btnKind='X' />
 		<LeftMenuBtn
 			iconClassName='fas fa-fire fa-lg'
 			btnTextName='Popular Albums'
