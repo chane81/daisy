@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import LeftMenu from '../../components/Layout/LeftMenu';
 
-interface IProps {}
+interface IProps {
+	className?: string;
+}
 
 class LeftMenuContainer extends Component<IProps> {
 	public render() {
-		return <LeftMenu />;
+		return <LeftMenu {...this.props} />;
 	}
 }
 

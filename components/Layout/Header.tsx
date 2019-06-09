@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import Navbar from '../Button/Navbar';
-import Loading from '../Etc/Loading';
 
+/**
+ * 설명:						헤더 컴포넌트, 검색바 네비바가 위치함
+ * className:				css class 명
+ */
 interface IProps {
 	className?: string;
 }
@@ -13,18 +16,6 @@ const HeaderWrapper = styled.div`
 	align-items: center;
 	height: 50px;
 	border-bottom: solid 1px #868e96;
-
-	.nav-area {
-		text-align: left;
-		width: 15%;
-		i {
-			margin: 0 25px 0 15px;
-		}
-
-		.fa-bars:hover {
-			cursor: pointer;
-		}
-	}
 
 	.search-area {
 		width: 85%;
@@ -59,11 +50,7 @@ const HeaderWrapper = styled.div`
 const Header: React.FC<IProps> = props => {
 	return (
 		<HeaderWrapper {...props}>
-			<Navbar />
-			<div className='nav-area'>
-				{/* <i className='fas fa-bars fa-lg' /> */}
-				<span>DAISY</span>
-			</div>
+			<Navbar btnTextName='DAISY' />
 			<div className='search-area'>
 				<input
 					className='search-box'

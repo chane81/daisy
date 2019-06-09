@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import Header from '../../components/Layout/Footer';
+import Footer from '../../components/Layout/Footer';
 
-interface IProps {}
+interface IProps {
+	className?: string;
+}
 
 class FooterContainer extends Component<IProps> {
 	public render() {
-		return <Header />;
+		return <Footer {...this.props} />;
 	}
 }
 

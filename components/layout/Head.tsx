@@ -4,6 +4,9 @@ import '../../styles/Global.scss';
 
 const defaultDescription = '';
 
+/**
+ * 설명:						<head></head> 테그안에 들어갈 내용이 담긴 컴포넌트
+ */
 interface IProps {
 	title?: string;
 	description?: string;
