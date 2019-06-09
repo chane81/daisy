@@ -40,17 +40,17 @@ const LeftMenu: React.FC<IProps> = props => (
 		<LeftMenuBtn
 			iconClassName='fas fa-chevron-right'
 			btnTextName='발라드'
-			depth={3}
+			depth={2}
 		/>
 		<LeftMenuBtn
 			iconClassName='fas fa-chevron-right'
 			btnTextName='R&B'
-			depth={3}
+			depth={2}
 		/>
 		<LeftMenuBtn
 			iconClassName='fas fa-chevron-right'
 			btnTextName='락'
-			depth={3}
+			depth={2}
 		/>
 	</LeftMenuWrapper>
 );
