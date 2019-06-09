@@ -1,17 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 /**
  * 설명:						네비바 버튼
  * className:				css class 명
  * btnTextName: 		버튼 표시 이름
+ * btnKind:					버튼종류 - X: x 버튼,  A: arrow 버튼
  */
 interface IProps {
 	className?: string;
 	btnTextName?: string;
+	btnKind?: string;
 }
 
-const NavbarWrapper = styled('div')`
+const NavbarWrapper = styled('div')<IProps>`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -29,17 +31,28 @@ const NavbarWrapper = styled('div')`
 			content: '';
 			display: block;
 			height: 3px;
-			margin: 5px 0;
+			margin: 5.5px 0;
+
 			transition: all 0.2s ease-in-out;
 		}
 
-		:hover:before {
-			transform: translateY(8px) rotate(130deg);
-		}
+		${(props: IProps) => {
+			const isArrow = props.btnKind === 'A';
+			const transY: string = isArrow ? '3.5px' : '8px';
+			const width: string = isArrow ? '15px' : '25px';
 
-		:hover:after {
-			transform: translateY(-8px) rotate(-133deg);
-		}
+			return css`
+				:hover:before {
+					transform: translateY(${transY}) rotate(130deg);
+					width: ${width};
+				}
+
+				:hover:after {
+					transform: translateY(-${transY}) rotate(-133deg);
+					width: ${width};
+				}
+			`;
+		}};
 
 		:hover div {
 			transform: scale(0);
