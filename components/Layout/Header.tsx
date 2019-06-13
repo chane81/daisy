@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Navbar from '../Button/Navbar';
 
 /**
  * 설명:						헤더 컴포넌트, 검색바 네비바가 위치함
  * className:				css class 명
+ * navbarVisible:		nav바 비져블 true/false
+ * handleNavClick:	nav바 클릭 이벤트 핸들러
  */
 interface IProps {
 	className?: string;
+	navbarVisible?: boolean;
+	handleNavClick?: () => void;
 }
 
 const HeaderWrapper = styled.div`
@@ -52,7 +56,12 @@ const HeaderWrapper = styled.div`
 const Header: React.FC<IProps> = props => {
 	return (
 		<HeaderWrapper {...props}>
-			<Navbar btnTextName='DAISY' btnKind='A' />
+			<Navbar
+				btnTextName='DAISY'
+				btnKind='A'
+				visible={props.navbarVisible}
+				handleNavClick={props.handleNavClick}
+			/>
 			<div className='search-area'>
 				<input
 					className='search-box'

@@ -20,11 +20,10 @@ const LeftMenuBtnWrapper = styled('div')<IProps>`
 	flex-direction: row;
 	justify-content: start;
 	align-items: center;
-
-	width: 100%;
-	line-height: 3.5em;
-
+	width: 11.4rem;
+	line-height: 3.5rem;
 	font-family: 'Noto Sans KR', sans-serif;
+	transition: background-color 0.2s ease-in-out;
 
 	:hover {
 		background-color: #e9ecef;

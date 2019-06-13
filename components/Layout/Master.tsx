@@ -22,7 +22,6 @@ const MasterWrapper = styled.div`
 		flex-direction: row;
 		min-height: 34.68rem;
 		height: calc(100vh - 65px);
-		/* flex: 1; */
 
 		.rightArea {
 			display: flex;
@@ -40,8 +39,7 @@ const MasterWrapper = styled.div`
 `;
 
 interface IProps {
-	propContents: React.ComponentType;
-	children: React.ReactNode;
+	children?: React.ReactNode;
 }
 
 const Master: React.FC<IProps> = props => (

@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React, { useRef, useState } from 'react';
+import styled, { css, StyledComponent } from 'styled-components';
 
 /**
  * 설명:						네비바 버튼
@@ -11,10 +11,13 @@ interface IProps {
 	className?: string;
 	btnTextName?: string;
 	btnKind?: string;
+	visible?: boolean;
+	handleNavClick?: () => void;
 }
 
 const NavbarWrapper = styled('div')<IProps>`
-	display: flex;
+	display: ${(props: IProps) =>
+		props.visible || props.visible === undefined ? 'flex' : 'none'};
 	flex-direction: row;
 	align-items: center;
 	height: 50px;
@@ -74,7 +77,7 @@ const NavbarWrapper = styled('div')<IProps>`
 const Navbar: React.FC<IProps> = props => {
 	return (
 		<NavbarWrapper {...props}>
-			<div className='nav-bar'>
+			<div className='nav-bar' onClick={props.handleNavClick}>
 				<div />
 			</div>
 			<div className='nav-text'>

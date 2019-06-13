@@ -1,14 +1,37 @@
+import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
 import Header from '../../components/Layout/Header';
+import { IStore, IUiModelType } from '../../stores/storeTypes';
 
+/**
+ * 설명:						레프트메뉴 컴포넌트
+ * className:				css class 명
+ * store:						store
+ */
 interface IProps {
 	className?: string;
+	store?: IStore;
 }
 
 class HeaderContainer extends Component<IProps> {
+	private handleNavClick = () => {
+		const { uiModel } = this.props.store!;
+		uiModel.setLeftMenuToggle();
+	};
+
 	public render() {
-		return <Header {...this.props} />;
+		const { uiModel } = this.props.store!;
+
+		return (
+			<Header
+				navbarVisible={!uiModel.leftMenuVisible}
+				className={this.props.className}
+				handleNavClick={this.handleNavClick}
+			/>
+		);
 	}
 }
 
-export default HeaderContainer;
+export default inject(({ store }) => ({ store }))(
+	observer(HeaderContainer)
+);
