@@ -1,4 +1,5 @@
 import { IStore } from './store';
+import { IUiModelType } from './uiStore';
 
 /** 외부에서 타입참조용으로 쓰이는 인터페이스들 */
-export { IStore };
+export { IUiModelType, IStore };

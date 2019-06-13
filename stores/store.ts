@@ -1,4 +1,5 @@
 import { applySnapshot, Instance, types } from 'mobx-state-tree';
+import uiStore from './uiStore';
 
 type IStore = Instance<typeof store>;
 
@@ -9,14 +10,14 @@ const store = types
 		/** 스토어 아이덴티티 */
 		identifier: types.optional(types.identifier, 'store'),
 
-		/** 모달 visible 여부 true/false */
-		modalVisible: types.optional(types.boolean, false)
+		/** UI 모델 */
+		uiModel: types.optional(uiStore.model, () => uiStore.create)
 	})
-	.views((self) => ({}));
+	.views(self => ({}));
 
 const initializeStore = (isServer, snapshot = null) => {
 	const defaultValue = {
-		modalVisible: false
+		uiModel: { ...uiStore.defaultValue }
 	};
 
 	// 서버일 경우에 대한 로직 작성
