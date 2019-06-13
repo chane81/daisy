@@ -5,7 +5,7 @@
 		"member-ordering": false,
 		"object-literal-key-quotes": [false, "as-needed"],
 		"jsx-boolean-value": false,
-		"semicolon": true,
+		"semicolon": [true, "always", "ignore-bound-class-methods"],
 		"strict-type-predicates": false,
 		"trailing-comma": false,
 		"no-consecutive-blank-lines": true,
