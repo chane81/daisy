@@ -10,7 +10,7 @@
 		"editor.formatOnSave": false
 	},
 	"editor.codeActionsOnSave": {
-		"source.fixAll.tslint": false
+		"source.fixAll.tslint": true
 	},
 	"editor.fontFamily": "Consolas, 'Courier New', monospace, 'Segoe UI emoji', 'Segoe UI Symbol'",
 
@@ -26,11 +26,12 @@
 	"prettier.jsxSingleQuote": true,
 	"prettier.tabWidth": 2,
 	"prettier.useTabs": true,
-	"prettier.printWidth": 80,
+	"prettier.printWidth": 75,
 	"prettier.singleQuote": true,
 	"prettier.bracketSpacing": true,
 	"prettier.trailingComma": "none",
 	"prettier.tslintIntegration": true,
+	"prettier.semi": true,
 
 	// folter exclude
 	"search.exclude": {
