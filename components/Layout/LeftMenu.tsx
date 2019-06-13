@@ -19,11 +19,13 @@ const LeftMenuWrapper = styled('div')`
 	border-right: 1px solid #868e96;
 	border-bottom: 1px solid #868e96;
 	min-width: 11.4em;
+	min-height: 50px;
+	overflow-y: auto;
 `;
 
 const LeftMenu: React.FC<IProps> = props => (
 	<LeftMenuWrapper {...props}>
-		<Navbar btnTextName='DAISY' btnKind='X' />
+		<Navbar btnTextName='DAISY' className='left-navbar' btnKind='X' />
 		<LeftMenuBtn
 			iconClassName='fas fa-fire fa-lg'
 			btnTextName='Popular Albums'

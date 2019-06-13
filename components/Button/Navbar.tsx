@@ -17,6 +17,7 @@ const NavbarWrapper = styled('div')<IProps>`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	height: 50px;
 
 	.nav-bar {
 		margin: 1em;

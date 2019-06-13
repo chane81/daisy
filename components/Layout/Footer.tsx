@@ -14,12 +14,14 @@ const FooterWrapper = styled('div')`
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	height: 4rem;
-	border-bottom: 1px solid #868e96;
+	height: 65px;
+	/* border-bottom: 1px solid #868e96; */
 `;
 
 const Footer: React.FC<IProps> = props => (
-	<FooterWrapper {...props}>푸터</FooterWrapper>
+	<FooterWrapper {...props}>
+		<div>푸터</div>
+	</FooterWrapper>
 );
 
 export default Footer;
