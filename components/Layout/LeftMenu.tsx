@@ -26,6 +26,7 @@ const LeftMenuWrapper = styled('div')<IProps>`
 	overflow-y: auto;
 	transition: width 0.3s ease-in-out;
 	width: ${(props: IProps) => (props.visible ? '11.4rem' : '0')};
+	overflow-x: hidden;
 `;
 
 const LeftMenu: React.FC<IProps> = props => {
