@@ -1,4 +1,6 @@
 import { applySnapshot, Instance, types } from 'mobx-state-tree';
+import playItemCollectionStore from './playItemCollectionStore';
+import playerStore from './playerStore';
 import uiStore from './uiStore';
 
 type IStore = Instance<typeof store>;
@@ -11,13 +13,27 @@ const store = types
 		identifier: types.optional(types.identifier, 'store'),
 
 		/** UI 모델 */
-		uiModel: types.optional(uiStore.model, () => uiStore.create)
+		uiModel: types.optional(uiStore.model, () => uiStore.create),
+
+		/** 유튜브 API - playItemCollection 모델 */
+		playItemCollectionModel: types.optional(
+			playItemCollectionStore.model,
+			() => playItemCollectionStore.create
+		),
+
+		/** 유튜브 플레이어 모델 */
+		playerModel: types.optional(
+			playerStore.model,
+			() => playerStore.create
+		)
 	})
 	.views(self => ({}));
 
 const initializeStore = (isServer, snapshot = null) => {
 	const defaultValue = {
-		uiModel: { ...uiStore.defaultValue }
+		uiModel: { ...uiStore.defaultValue },
+		playItemCollectionModel: { ...playItemCollectionStore.defaultValue },
+		playerModel: { ...playerStore.defaultValue }
 	};
 
 	// 서버일 경우에 대한 로직 작성
