@@ -41,8 +41,8 @@ const LeftMenu: React.FC<IProps> = props => {
 			/>
 			<LeftMenuBtn
 				iconClassName='fas fa-fire fa-lg'
-				btnTextName='Popular Albums'
-				depth={1}
+				btnTextName='Popular Tracks'
+				linkUrl='/popular-tracks'
 			/>
 			<LeftMenuBtn
 				iconClassName='fas fa-star fa-lg'
