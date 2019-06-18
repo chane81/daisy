@@ -22,13 +22,15 @@ function getClientConfig() {
 	const envVal = {
     // 개발환경 변수
 		development: {
-			SOCKET_SERVER_HOST: 'http://localhost:5000',
-			JWT_PRIVATE_KEY: 'cloud99'
+      JWT_PRIVATE_KEY: 'dev9254',
+      YOUTUBE_API_BASE_URL: 'https://www.googleapis.com/youtube/v3',
+      YOUTUBE_API_KEY: 'AIzaSyDp1dL6gomS_0dMQZyKsgTBkdTB9xGwBHQ'
     },
     // 실서버환경 변수
 		production: {
-			SOCKET_SERVER_HOST: 'https://socket-server-node.herokuapp.com',
-			JWT_PRIVATE_KEY: 'black2284'
+      JWT_PRIVATE_KEY: 'black2284',
+      YOUTUBE_API_BASE_URL: 'https://www.googleapis.com/youtube/v3',
+      YOUTUBE_API_KEY: 'AIzaSyDp1dL6gomS_0dMQZyKsgTBkdTB9xGwBHQ'
 		}
 	};
 
