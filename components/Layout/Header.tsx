@@ -46,6 +46,7 @@ const HeaderWrapper = styled.div`
 			background-color: white;
 			width: 50px;
 			cursor: pointer;
+			background-color: #f1f3f5;
 			&:hover {
 				background-color: #e9ecef;
 			}
