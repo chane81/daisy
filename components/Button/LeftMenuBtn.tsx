@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import Router from 'next/router';
 
 /**
  * 설명:						레프트 메뉴 버튼 컴포넌트
@@ -13,6 +14,7 @@ interface IProps {
 	iconClassName?: string;
 	btnTextName?: string;
 	depth?: number;
+	linkUrl?: string;
 }
 
 const LeftMenuBtnWrapper = styled('div')<IProps>`
@@ -49,8 +51,12 @@ const LeftMenuBtnWrapper = styled('div')<IProps>`
 	}}
 `;
 const LeftMenuBtn: React.FC<IProps> = props => {
+	const handleClick = () => {
+		Router.push(props.linkUrl!);
+	};
+
 	return (
-		<LeftMenuBtnWrapper {...props}>
+		<LeftMenuBtnWrapper {...props} onClick={handleClick}>
 			<div className='icon'>
 				<i className={props.iconClassName} />
 			</div>
