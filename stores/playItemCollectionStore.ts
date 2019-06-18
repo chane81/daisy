@@ -1,5 +1,5 @@
 import { flow, Instance, types } from 'mobx-state-tree';
-import { getPlayList } from '../api/youtubeApi';
+import { getPlayList } from '../apis/youtubeApi';
 
 /** 썸네일 모델 */
 const thumbnailModel = types.model('thumbnailModel', {
