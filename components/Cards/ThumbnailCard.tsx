@@ -13,7 +13,7 @@ interface IProps {
 	videoId?: string;
 	title?: string;
 	flexBasis?: string;
-	handleClick?: (videoId: string) => void;
+	handleClick?: (videoId: string, title: string) => void;
 }
 
 const ThumbnailCardWrapper = styled('div')<IProps>`
@@ -22,7 +22,7 @@ const ThumbnailCardWrapper = styled('div')<IProps>`
 	width: ${(props: IProps) => props.width};
 	height: ${(props: IProps) => props.height};
 	flex: 1 ${(props: IProps) => props.flexBasis};
-	margin: 0.5rem;
+	margin: 0 0.5rem 0.5rem 0.5rem;
 
 	img {
 		width: 100%;
@@ -52,7 +52,7 @@ const ThumbnailCard: React.FC<IProps> = props => {
 	return (
 		<ThumbnailCardWrapper
 			{...props}
-			onClick={() => props.handleClick!(props.videoId!)}
+			onClick={() => props.handleClick!(props.videoId!, props.title!)}
 		>
 			<img src={props.imageUrl} />
 			<div

@@ -11,7 +11,7 @@ import { IStore } from '../../stores/storeTypes';
 interface IProps {
 	className?: string;
 	store?: IStore;
-	handleThumbnailClick?: (video: string) => void;
+	handleThumbnailClick?: (video: string, title: string) => void;
 }
 
 class ThumbnailListCardContainer extends Component<IProps> {

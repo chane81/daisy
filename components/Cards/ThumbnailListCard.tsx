@@ -12,21 +12,38 @@ import { IApiItemsModelType } from '../../stores/storeTypes';
 interface IProps {
 	className?: string;
 	playListItems?: IApiItemsModelType[];
-	handleThumbnailClick?: (videoId: string) => void;
+	handleThumbnailClick?: (videoId: string, title: string) => void;
 }
 
 const ThumbnailListCardWrapper = styled('div')<IProps>`
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
-	padding: 1rem 1.5rem 0 1.5rem;
-	height: 450px;
+	padding: 0 1.5rem 0 1.5rem;
+	height: calc(100vh - 115px);
+
+	/* scroll 바 */
 	overflow-y: auto;
+	::-webkit-scrollbar-thumb {
+		background-color: #ced4da;
+		border-radius: 8px;
+		-webkit-border-radius: 8px;
+		-moz-border-radius: 8px;
+		-ms-border-radius: 8px;
+		-o-border-radius: 8px;
+	}
+	&::-webkit-scrollbar {
+		width: 8px;
+	}
+	&::-webkit-scrollbar-track {
+		background: #f8f9fa;
+	}
+	/* scroll 바 */
 `;
 
 const ThumbnailListCard: React.FC<IProps> = props => {
 	return (
-		<ThumbnailListCardWrapper>
+		<ThumbnailListCardWrapper className={props.className}>
 			{props.playListItems!.map(data => (
 				<ThumbnailCard
 					key={data.id}
