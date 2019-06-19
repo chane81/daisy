@@ -23,7 +23,7 @@ const PopularTracksWrapper = styled('div')`
 
 		/* 16:9 */
 		min-width: calc(55vw);
-		max-width: calc(16 * calc(100vh - 115px) / 9);
+		max-width: calc(16 * calc(100vh - 117px) / 9);
 
 		div {
 			padding-right: -2px;
@@ -34,9 +34,13 @@ const PopularTracksWrapper = styled('div')`
 				display: block;
 				width: 100%;
 				min-height: calc(55vw * 9 / 16);
-				max-height: calc(100vh - 115px - 9.8rem);
+				max-height: calc(100vh - 117px - 9.8rem);
 			}
 		}
+	}
+
+	.thumbnail-list {
+		height: calc(100vh - 117px);
 	}
 
 	.youtube-title {
@@ -47,7 +51,7 @@ const PopularTracksWrapper = styled('div')`
 		font-family: 'TmonMonsori', sans-serif;
 		font-size: 2rem;
 		font-weight: 100;
-		max-width: calc(16 * calc(100vh - 115px) / 9);
+		max-width: calc(16 * calc(100vh - 117px) / 9);
 	}
 
 	@media ${device.desktop + ',' + device.tablet} {
