@@ -56,7 +56,6 @@
 		"@types/react-dom": "^16.8.2",
 		"@types/react-youtube": "^7.6.2",
 		"@types/styled-components": "^4.1.16",
-		"babel-core": "^6.26.3",
 		"babel-plugin-styled-components": "^1.10.0",
 		"enzyme": "^3.10.0",
 		"enzyme-adapter-react-16": "^1.14.0",
