@@ -11,8 +11,9 @@
 	font-family: 'Swagger';
 	font-style: normal;
 	font-weight: 400;
-	src: url('/static/fonts/SDSwaggerTTF.eot?#iefix') format('embedded-opentype')
-			url('/static/fonts/SDSwaggerTTF.woff2') format('woff2'),
+	src: url('/static/fonts/SDSwaggerTTF.eot?#iefix')
+			format('embedded-opentype') url('/static/fonts/SDSwaggerTTF.woff2')
+			format('woff2'),
 		url('/static/fonts/SDSwaggerTTF.woff') format('woff'),
 		url('/static/fonts/SDSwaggerTTF.ttf') format('truetype');
 }
@@ -138,6 +139,7 @@ h6 {
 	box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
 }
 
+/* Media Screen - Desktop */
 @media (min-width: 1024px) {
 	h1 {
 		font-size: 3em;
@@ -164,6 +166,7 @@ h6 {
 	}
 }
 
+/* Media Screen - Tablet  */
 @media (max-width: 1023px) {
 	h1 {
 		font-size: 2em;
@@ -188,4 +191,8 @@ h6 {
 	h6 {
 		font-size: 0.75em;
 	}
+}
+
+/* Media Screen - Mobie */
+@media screen and (max-width: 767px) {
 }
