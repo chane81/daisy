@@ -11,7 +11,7 @@
 		"####### product mode": "",
 		"build": "next build && next export -o dist",
 		"start": "next start -p $PORT",
-		"heroku-postbuild": "next build"
+		"heroku-postbuild": "yarn build"
 	},
 	"dependencies": {
 		"@zeit/next-css": "^1.0.1",
