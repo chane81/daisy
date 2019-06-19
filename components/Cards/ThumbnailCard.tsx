@@ -55,7 +55,10 @@ const ThumbnailCard: React.FC<IProps> = props => {
 			onClick={() => props.handleClick!(props.videoId!)}
 		>
 			<img src={props.imageUrl} />
-			<div className='title'>{props.title}</div>
+			<div
+				className='title'
+				dangerouslySetInnerHTML={{ __html: props.title! }}
+			/>
 		</ThumbnailCardWrapper>
 	);
 };
