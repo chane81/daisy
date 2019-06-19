@@ -9,9 +9,9 @@ const apiKey = process.env.YOUTUBE_API_KEY;
 /**
  * 유튜브 API - 재생목록 가져오기 API 호출
  * @param playlistId 플레이리스트ID
- * @param maxResults 최대개수
+ * @param maxResults 최대출력 개수
  */
-export const getPlayList = async (
+export const getPlayListItems = async (
 	playlistId: string,
 	maxResults: number
 ) => {
@@ -34,6 +34,39 @@ export const getPlayList = async (
 	 */
 	return _.map(items, data => ({
 		..._.pick(data, ['id']),
-		..._.pick(data, ['snippet']).snippet
+		..._.pick(data, ['snippet']).snippet,
+		videoId: _.get(data, 'snippet.resourceId.videoId')
+	}));
+};
+
+/**
+ * 유튜브 API - 검색 API 호출
+ * @param searchText 검색 키워드
+ * @param maxResults 최대출력 개수
+ */
+export const getSearch = async (
+	searchText: string,
+	maxResults: number
+) => {
+	const url = `${baseUrl}/search`;
+
+	const {
+		data: { items }
+	} = await axios.get(url, {
+		params: {
+			key: apiKey,
+			maxResults,
+			part: 'snippet',
+			order: 'viewCount',
+			q: searchText,
+			type: 'video',
+			videoDefinition: 'high'
+		}
+	});
+
+	return _.map(items, data => ({
+		id: _.get(data, 'id.videoId'),
+		..._.pick(data, ['snippet']).snippet,
+		videoId: _.get(data, 'id.videoId')
 	}));
 };
