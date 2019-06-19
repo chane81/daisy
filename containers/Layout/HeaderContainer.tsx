@@ -19,6 +19,11 @@ class HeaderContainer extends Component<IProps> {
 		uiModel.setLeftMenuToggle();
 	};
 
+	private handleSearchClick = (searchText: string) => {
+		const { apiModel } = this.props.store!;
+		apiModel.getSearch(searchText, 20);
+	};
+
 	public render() {
 		const { uiModel } = this.props.store!;
 
@@ -27,6 +32,7 @@ class HeaderContainer extends Component<IProps> {
 				navbarVisible={!uiModel.leftMenuVisible}
 				className={this.props.className}
 				handleNavClick={this.handleNavClick}
+				handleSearchClick={this.handleSearchClick}
 			/>
 		);
 	}

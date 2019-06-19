@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Navbar from '../Button/Navbar';
 
@@ -12,6 +12,7 @@ interface IProps {
 	className?: string;
 	navbarVisible?: boolean;
 	handleNavClick?: () => void;
+	handleSearchClick?: (searchText: string) => void;
 }
 
 const HeaderWrapper = styled.div`
@@ -55,6 +56,15 @@ const HeaderWrapper = styled.div`
 `;
 
 const Header: React.FC<IProps> = props => {
+	const txtSearch = useRef<HTMLInputElement>(null);
+
+	// 검색어 입력 후 엔터키 쳤을 때
+	const handleSearch = e => {
+		if (e.key === 'Enter') {
+			props.handleSearchClick!(txtSearch.current!.value);
+		}
+	};
+
 	return (
 		<HeaderWrapper {...props}>
 			<Navbar
@@ -68,8 +78,15 @@ const Header: React.FC<IProps> = props => {
 					className='search-box'
 					type='text'
 					placeholder='노래/가수를 검색해주세요.'
+					onKeyDown={handleSearch}
+					ref={txtSearch}
 				/>
-				<div className='search-icon'>
+				<div
+					className='search-icon'
+					onClick={() =>
+						props.handleSearchClick!(txtSearch.current!.value)
+					}
+				>
 					<i className='fas fa-search' />
 				</div>
 			</div>
