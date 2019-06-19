@@ -6,7 +6,8 @@ const model = types
 		/** 스토어 아이덴티티 */
 		identifier: types.optional(types.identifier, 'playerModel'),
 		player: types.optional(types.frozen(), null),
-		videoId: types.string,
+		videoId: types.optional(types.string, ''),
+		title: types.optional(types.string, ''),
 		opts: types.model({
 			height: types.string,
 			width: types.string,
@@ -42,8 +43,8 @@ const model = types
 		setVideoId(videoId: string) {
 			self.videoId = videoId;
 		},
-		setHeight(height: string) {
-			self.opts.height = height;
+		setTitle(title: string) {
+			self.title = title;
 		},
 		setOpts(
 			height?: string,
@@ -74,9 +75,10 @@ const defaultValue = {
 	identifier: 'playerModel',
 	player: null,
 	videoId: '',
+	title: '',
 	opts: {
 		height: '300',
-		width: '560',
+		width: '550',
 		playerVars: {
 			autoplay: 1 as 1,
 			controls: 1 as 1
