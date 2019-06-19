@@ -138,7 +138,10 @@ class PopularTracks extends Component<IProps> {
 							opts={playerModel.opts}
 							onReady={this.handleReady}
 						/>
-						<div className='youtube-title'>{playerModel.title}</div>
+						<div
+							className='youtube-title'
+							dangerouslySetInnerHTML={{ __html: playerModel.title }}
+						/>
 					</div>
 
 					<ThumbnailListCardContainer
