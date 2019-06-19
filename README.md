@@ -149,3 +149,21 @@
         }
       }
     ```
+
+- ## 미디어쿼리 유틸(include-media)
+
+  - 참고 문서 URL
+    > https://include-media.com/
+  - 사용방법
+
+    ```css
+    $breakpoints: (
+    	small: 320px,
+    	medium: 768px,
+    	large: 1024px
+    );
+
+    @include media('>medium', '<=large') {
+    	width: 100%;
+    }
+    ```

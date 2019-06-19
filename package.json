@@ -26,6 +26,7 @@
 		"cross-env": "^5.2.0",
 		"dotenv-webpack": "^1.7.0",
 		"es6-promise": "^4.2.6",
+		"jsonwebtoken": "^8.5.1",
 		"lodash": "^4.17.11",
 		"mobx": "^4.9.2",
 		"mobx-devtools-mst": "^0.9.21",
@@ -41,6 +42,7 @@
 		"react-youtube": "^7.9.0",
 		"styled-components": "^4.3.1",
 		"typescript": "^3.3.3333",
+		"universal-cookie": "^4.0.0",
 		"whatwg-fetch": "^3.0.0"
 	},
 	"devDependencies": {
