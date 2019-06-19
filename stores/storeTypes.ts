@@ -1,6 +1,14 @@
 import { IStore } from './store';
-import { IPlayItemCollectionModelType } from './playItemCollectionStore';
+import { IApiModelType } from './apiStore';
+import { IApiItemsModelType } from './apiItemsStore';
+import { IApiThumbnailsModelType } from './apiThumbnailsStore';
 import { IUiModelType } from './uiStore';
 
 /** 외부에서 타입참조용으로 쓰이는 인터페이스들 */
-export { IUiModelType, IPlayItemCollectionModelType, IStore };
+export {
+	IUiModelType,
+	IApiModelType,
+	IApiItemsModelType,
+	IApiThumbnailsModelType,
+	IStore
+};

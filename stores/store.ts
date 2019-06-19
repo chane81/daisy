@@ -1,5 +1,5 @@
 import { applySnapshot, Instance, types } from 'mobx-state-tree';
-import playItemCollectionStore from './playItemCollectionStore';
+import apiStore from './apiStore';
 import playerStore from './playerStore';
 import uiStore from './uiStore';
 
@@ -15,11 +15,8 @@ const store = types
 		/** UI 모델 */
 		uiModel: types.optional(uiStore.model, () => uiStore.create),
 
-		/** 유튜브 API - playItemCollection 모델 */
-		playItemCollectionModel: types.optional(
-			playItemCollectionStore.model,
-			() => playItemCollectionStore.create
-		),
+		/** 유튜브 DATA API 모델 */
+		apiModel: types.optional(apiStore.model, () => apiStore.create),
 
 		/** 유튜브 플레이어 모델 */
 		playerModel: types.optional(
@@ -32,7 +29,7 @@ const store = types
 const initializeStore = (isServer, snapshot = null) => {
 	const defaultValue = {
 		uiModel: { ...uiStore.defaultValue },
-		playItemCollectionModel: { ...playItemCollectionStore.defaultValue },
+		apiModel: { ...apiStore.defaultValue },
 		playerModel: { ...playerStore.defaultValue }
 	};
 
