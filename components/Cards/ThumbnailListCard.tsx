@@ -32,7 +32,7 @@ const ThumbnailListCard: React.FC<IProps> = props => {
 					key={data.id}
 					className={'thumbnail-card'}
 					videoId={data.videoId}
-					imageUrl={data.thumbnails!.medium!.url}
+					imageUrl={data.thumbnails!.high!.url}
 					title={data.title}
 					flexBasis={'18.75rem'}
 					handleClick={props.handleThumbnailClick}
