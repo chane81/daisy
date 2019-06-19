@@ -29,7 +29,7 @@ const PopularTracksWrapper = styled('div')`
 			padding-right: -2px;
 			/* 16:9 */
 			/* width:height ratio = 16/9 = 1.778 */
-			/* height:width ratio = 9/16 = .5625  */
+			/* height:width ratio = 9/16 = .5625 */
 			.youtube {
 				display: block;
 				width: 100%;
