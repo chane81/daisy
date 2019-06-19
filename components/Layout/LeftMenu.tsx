@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import LeftMenuBtn from '../Button/LeftMenuBtn';
 import Navbar from '../Button/Navbar';
 
@@ -24,9 +24,10 @@ const LeftMenuWrapper = styled('div')<IProps>`
 	border-bottom: 1px solid #868e96;
 	min-height: 50px;
 	overflow-y: auto;
-	transition: width 0.3s ease-in-out;
-	width: ${(props: IProps) => (props.visible ? '11.4rem' : '0')};
 	overflow-x: hidden;
+	transition: min-width 0.3s, max-width 0.3s ease-in-out;
+	min-width: ${(props: IProps) => (props.visible ? '11.4rem' : '0')};
+	max-width: ${(props: IProps) => (props.visible ? '11.4rem' : '0')};
 `;
 
 const LeftMenu: React.FC<IProps> = props => {
