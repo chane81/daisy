@@ -1,4 +1,4 @@
-import { Instance, types } from 'mobx-state-tree';
+import { flow, Instance, types } from 'mobx-state-tree';
 
 // 유튜브 플레이어 모델
 const model = types
@@ -25,16 +25,48 @@ const model = types
 			self.player = player;
 		},
 		setPlay() {
-			self.player.playVideo();
+			setTimeout(() => {
+				self.player.playVideo();
+			});
 		},
 		setPause() {
-			self.player.pauseVideo();
+			setTimeout(() => {
+				self.player.pauseVideo();
+			});
 		},
 		setStop() {
-			self.player.stopVideo();
+			setTimeout(() => {
+				self.player.stopVideo();
+			});
 		},
 		setVideoId(videoId: string) {
 			self.videoId = videoId;
+		},
+		setHeight(height: string) {
+			self.opts.height = height;
+		},
+		setOpts(
+			height?: string,
+			width?: string,
+			autoplay?: 0 | 1,
+			controls?: 0 | 1 | 2
+		) {
+			if (height && self.opts.height !== height) {
+				console.log('height:', height);
+				self.opts.height = height;
+			}
+
+			if (width && self.opts.width !== width) {
+				self.opts.width = width;
+			}
+
+			if (autoplay && self.opts.playerVars.autoplay !== autoplay) {
+				self.opts.playerVars.autoplay = autoplay;
+			}
+
+			if (controls && self.opts.playerVars.controls !== controls) {
+				self.opts.playerVars.controls = controls;
+			}
 		}
 	}));
 
@@ -44,7 +76,7 @@ const defaultValue = {
 	videoId: '',
 	opts: {
 		height: '300',
-		width: '600',
+		width: '560',
 		playerVars: {
 			autoplay: 1 as 1,
 			controls: 1 as 1
