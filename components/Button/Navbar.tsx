@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled, { css, StyledComponent } from 'styled-components';
+import Link from 'next/link';
 
 /**
  * 설명:						네비바 버튼
@@ -68,6 +69,7 @@ const NavbarWrapper = styled('div')<IProps>`
 		font-family: 'Impact', sans-serif;
 		font-size: 1.6rem;
 		width: 15%;
+		cursor: pointer;
 		i {
 			margin: 0 25px 0 15px;
 		}
@@ -81,7 +83,9 @@ const Navbar: React.FC<IProps> = props => {
 				<div />
 			</div>
 			<div className='nav-text'>
-				<span>{props.btnTextName}</span>
+				<Link href='/'>
+					<span>{props.btnTextName}</span>
+				</Link>
 			</div>
 		</NavbarWrapper>
 	);
