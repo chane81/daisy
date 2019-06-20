@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Navbar from '../Button/Navbar';
+import { device } from '../../library/styleHelper';
 
 /**
  * 설명:						헤더 컴포넌트, 검색바 네비바가 위치함
@@ -27,12 +28,16 @@ const HeaderWrapper = styled.div`
 		text-align: right;
 		min-width: 18em;
 
-		input {
+		@media ${device.mobile} {
+			font-size: 0.6rem;
+		}
+
+		.search-box {
 			border: solid 1px #dee2e6;
 			border-right: none;
 			border-radius: 10px 0 0 10px;
-			line-height: 2rem;
-			width: 60%;
+			height: 2rem;
+			width: 50%;
 			min-width: 11.5em;
 			text-align: center;
 		}
@@ -90,7 +95,6 @@ const Header: React.FC<IProps> = props => {
 					<i className='fas fa-search' />
 				</div>
 			</div>
-			<hr />
 		</HeaderWrapper>
 	);
 };
