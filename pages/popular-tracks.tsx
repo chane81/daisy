@@ -22,7 +22,7 @@ const PopularTracksWrapper = styled('div')`
 		border-right: 1px solid #868e96;
 
 		/* 16:9 */
-		min-width: calc(55vw);
+		min-width: 55vw;
 		max-width: calc(16 * calc(100vh - 117px) / 9);
 
 		div {
