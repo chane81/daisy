@@ -21,13 +21,11 @@ const model = types
 		) {
 			const res = yield getPlayListItems(playlistId, maxResults);
 
-			console.log('res:', res);
 			self.playlistItems = res;
 		}),
 		getSearch: flow(function*(searchText: string, maxResults: number) {
 			const res = yield getSearch(searchText, maxResults);
 
-			console.log('search res:', res);
 			self.playlistItems = res;
 		})
 	}));
