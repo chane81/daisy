@@ -168,6 +168,225 @@
     }
     ```
 
+# 유틸
+
+- ## 이미지의 변수화(next-images)
+
+  - 참고 URL
+    > https://github.com/twopluszero/next-images
+  - yarn
+    > yarn add next-image
+  - next.config.js 설정
+
+    ```js
+    const withImages = require('next-images');
+
+    module.exports = withPlugins([[withSourceMaps], [withImages]], {
+    	webpack(config, options) {
+    		return config;
+    	}
+    });
+    ```
+
+  - 사용1 - 변수화
+
+    ```js
+    import img from './my-image.jpg';
+
+    export default () => (
+    	<div>
+    		<img src={img} />
+    	</div>
+    );
+    ```
+
+  - 사용2 - 이미지URL Prefix
+
+    ```jsx
+    // next.config.js
+    const withImages = require('next-images');
+
+    module.exports = withImages({
+    	assetPrefix: 'https://example.com',
+    	webpack(config, options) {
+    		return config;
+    	}
+    });
+
+    module.exports = withPlugins(
+    	[
+    		[withSourceMaps],
+    		[
+    			withImages,
+    			{
+    				assetPrefix: 'https://example.com'
+    			}
+    		]
+    	],
+    	{
+    		webpack(config, options) {
+    			return config;
+    		}
+    	}
+    );
+    ```
+
+# webpack 설정 관련
+
+- ## uglifyjs-webpack-plugin
+
+  - 파일용량을 줄이는 라이브러리
+  - 빌드시에 주로 실서버 배포시에 용량을 줄여야하니 개발모드에서는 할 필요가 없다.
+  - yarn 설치
+    > yarn add uglifyjs-webpack-plugin --dev
+  - webpack 내에서 plugins 쪽에서 설정을 넣어준다
+  - next.config.js 의 경우 아래와 같이 추가
+
+    ```js
+    webpack: (config, options) => {
+    	const originalEntry = config.entry;
+
+    	config.plugins = config.plugins || [];
+
+    	config.plugins = [
+    		...config.plugins,
+    		new webpack.optimize.UglifyJsPlugin({
+    			sourceMap:
+    				options.devtool &&
+    				(options.devtool.indexOf('sourcemap') >= 0 ||
+    					options.devtool.indexOf('source-map') >= 0)
+    		})
+    	];
+    };
+    ```
+
+- ## 빌드시 uglify, source-map 설정을 위한 설명
+
+  - 빌드시에 uglify 즉, 소스난독화를 하여 압축된 파일로 정적파일을 생성할 때 디버깅을 위한 source-map 파일을 만들게 된다.
+  - 소스난독화 설정
+
+    > 'terser-webpack-plugin' 라는 라이브러리 설치와 웹팩 설정이 필요하다.
+
+    > `옵션에서 'sourceMap: true' 를 주어도 '@zeit/next-source-maps' 라이브러리 설치/설정이 되어있지 않다면 source-map 파일은 생성이 되지 않는다.`
+
+  - source-map 파일 생성 설정
+
+    > source-map 파일을 생성을 위해 '@zeit/next-source-maps' 라는 라이브러리의 설치와 웹팩 설정이 필요하다.
+    > yarn add @zeit/next-source-maps
+
+  - 웹팩 설정(next.config.js)
+
+    ```js
+    const TerserPlugin = require('terser-webpack-plugin');
+    const withSourceMaps = require('@zeit/next-source-maps');
+
+    module.exports = withSourceMaps({
+    	webpack: (config, options) => {
+    		// 코드 난독화/압축화
+    		if (!options.dev && !options.isServer) {
+    			config.optimization.minimizer = [
+    				new TerserPlugin({
+    					parallel: true,
+    					sourceMap: true
+    				})
+    			];
+    		}
+
+    		return config;
+    	}
+    });
+    ```
+
+  - 주의사항
+
+    - 위의 설정대로 다 하여도 설정대로 파일이 생성이 안될 때가 있다.
+    - ex) source-map 파일을 생성하지 않으려 하는데 dist 에는 생성이 되어 있는 경우
+    - 기존 빌드파일들을 모두 다 제거하는 세팅을 하면 된다.
+
+      > yarn add rimraf
+
+    - package.json 설정
+
+      ```json
+      "scripts": {
+        "build": "yarn clean && next build && next export -o dist",
+        "clean": "rimraf dist/* .next/* "
+      }
+      ```
+
+# `개발이슈`
+
+- ## IE 에서의 find 에러
+
+  > ![](/static/images/finderror_1.png)
+
+  - 위의 그림과 같이 "개체가 'find' 속성이나 메서드를 지원하지 않습니다." 라는 에러 메시지가 IE 에서 확인이 되었다.(크롬이나 다른 브라우저에서는 나지 않음 -\_-)
+  - core-js node_modules 를 찾아서 폴더를 열어보면 core-js/es6/array.js 에서 아래의 코드를 확인할 수 있다
+    ```js
+    require('../modules/es6.array.find');
+    ```
+  - 해당에러는 array.find 쪽 ie 지원에 관한 부분이므로 polyfills.js 에 es6.array 를 추가해 주었다.
+  - symbol, number 는 덤으로 추가했다.
+
+    ```js
+    // 기존 polyfill import core-js
+    import 'core-js/es6/set';
+    import 'core-js/es6/map';
+    import 'core-js/es7/array';
+
+    // 추가된 polyfill import core-js
+    import 'core-js/es6/symbol';
+    import 'core-js/es6/array';
+    import 'core-js/es6/number';
+    ```
+
+- ## MOBX Warning 메시지(크롬, IE, 기타 브라우저 모두 해당)
+
+  > ![](/static/images/mobx_warning_1.png)
+
+  - 위의 그림과 같이 process.env.NODE_ENV 가 번들러에서 세팅이 되어있지 않다 라는 경고 메시지가 나온다.
+  - 이부분은 웹팩설정에서 아래와 같이 NODE_ENV 를 추가해주면 경고 메시지가 나오지 않고 해결이 된다.
+  - 아래는 next.config.js 의 웹팩 설정부분
+    ```js
+    new webpack.DefinePlugin({
+    	...env.stringified,
+    	'process.env.NODE_ENV': JSON.stringify(
+    		options.dev ? 'development' : 'production'
+    	)
+    });
+    ```
+
+- ## 웹펙에서 소스난독화/압축화를 할 때 기존에는 uglify 플러그인을 썼지만 아래 그림과 같이 deprecated 가 되었다.
+
+  > ![](/static/images/uglifyJsPlugin_deprecated_1.png)
+
+  - 웹팩 optimization.minimizer 을 사용하여 TerserPlugin 을 add 하여 대체 함
+  - 참고 URL
+    > https://github.com/zeit/next.js/issues/5021
+  - yarn
+    > yarn add terser-webpack-plugin --dev
+  - next.config.js 예제
+
+    ```js
+    const TerserPlugin = require('terser-webpack-plugin');
+    const withSourceMaps = require('@zeit/next-source-maps');
+
+    module.exports = withSourceMaps({
+    	webpack: (config, { dev, isServer }) => {
+    		if (!dev && !isServer) {
+    			config.optimization.minimizer = [
+    				new TerserPlugin({
+    					parallel: true,
+    					sourceMap: true
+    				})
+    			];
+    		}
+
+    		return config;
+    	}
+    });
+    ```
+
 # `heroku 클라이언트 URL`
 
 - https://daisy-app.herokuapp.com/
