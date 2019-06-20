@@ -176,6 +176,6 @@
 
 - 실행화면
 
-  > ![](/static/images/screen1.png)
-
   > ![](/static/images/screen2.png)
+
+  > ![](/static/images/screen3.png)
