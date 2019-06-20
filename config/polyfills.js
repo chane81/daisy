@@ -1,11 +1,15 @@
 /* eslint no-extend-native: 0 */
 // core-js comes with Next.js. So, you can import it like below
+import 'react-app-polyfill/ie11';
 import includes from 'core-js/library/fn/string/virtual/includes';
 import repeat from 'core-js/library/fn/string/virtual/repeat';
 import assign from 'core-js/library/fn/object/assign';
 import 'core-js/es6/set';
 import 'core-js/es6/map';
 import 'core-js/es7/array';
+import 'core-js/es6/symbol';
+import 'core-js/es6/array';
+import 'core-js/es6/number';
 
 
 if (typeof Promise === 'undefined') {
