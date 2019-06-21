@@ -132,6 +132,10 @@ input {
 	border-style: groove;
 }
 
+input:focus {
+	outline: none;
+}
+
 button {
 	border-style: groove;
 }
