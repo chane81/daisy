@@ -44,6 +44,7 @@ const ThumbnailCardWrapper = styled('div')<IProps>`
 
 		img {
 			width: 10rem;
+			height: 7rem;
 		}
 	}
 
