@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { device } from '../../library/styleHelper';
 
 /**
  * 설명:						썸네일 카드
@@ -22,10 +23,28 @@ const ThumbnailCardWrapper = styled('div')<IProps>`
 	width: ${(props: IProps) => props.width};
 	height: ${(props: IProps) => props.height};
 	flex: 1 ${(props: IProps) => props.flexBasis};
-	margin: 0 0.5rem 0.5rem 0.5rem;
 
-	img {
-		width: 100%;
+	@media ${device.desktop + ',' + device.tablet} {
+		flex: 1 1 13rem;
+		margin: 0 0 0.5rem 0.5rem;
+		img {
+			width: 100%;
+		}
+	}
+
+	@media ${device.mobile} {
+		flex-flow: row nowrap;
+		flex: 1 25rem;
+		padding: 0 0 0.5rem 0;
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom: 1px solid #adb5bd;
+		margin: 0 0.5rem 0.5rem 0.5rem;
+
+		img {
+			width: 10rem;
+		}
 	}
 
 	border: 1px solid #ced4da;
