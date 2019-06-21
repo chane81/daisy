@@ -17,22 +17,23 @@ const MasterWrapper = styled.div`
 	flex-direction: column;
 	min-height: 115px;
 
-	.bodyArea {
+	.body-area {
 		display: flex;
 		flex-direction: row;
 		min-height: 34.68rem;
-		height: calc(100vh - 65px);
+		height: 100vh;
+		min-width: 360px;
 
-		.rightArea {
+		.right-area {
 			display: flex;
 			flex-direction: column;
 			flex: 1;
 			border-bottom: 1px solid #868e96;
 			min-height: 50px;
 
-			.contentsArea {
+			.contents-area {
 				flex: 1;
-				overflow-y: auto;
+				overflow-y: hidden;
 			}
 		}
 	}
@@ -44,17 +45,17 @@ interface IProps {
 
 const Master: React.FC<IProps> = props => (
 	<MasterWrapper {...props}>
-		<div className='bodyArea'>
-			<LeftMenuContainer className='LeftMenuWrapper' />
-			<div className='rightArea'>
+		<div className='body-area'>
+			<LeftMenuContainer className='left-menu-wrapper' />
+			<div className='right-area'>
 				<HeaderContainer />
 
-				<div id='contents' className='contentsArea'>
+				<div id='contents' className='contents-area'>
 					{props.children}
 				</div>
 			</div>
 		</div>
-		<FooterContainer />
+		{/* <FooterContainer /> */}
 	</MasterWrapper>
 );
 
