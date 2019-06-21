@@ -10,7 +10,7 @@
 		"tslint": "tslint -c tslint.json -p tsconfig.json",
 		"####### product mode": "",
 		"build": "yarn clean && next build && next export -o dist",
-		"start": "next start",
+		"start": "next start -p $PORT",
 		"clean": "rimraf dist/* .next/* build/*",
 		"heroku-postbuild": "yarn build"
 	},
