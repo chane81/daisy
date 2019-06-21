@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import FooterContainer from '../../containers/Layout/FooterContainer';
 import HeaderContainer from '../../containers/Layout/HeaderContainer';
@@ -44,17 +44,6 @@ interface IProps {
 }
 
 const Master: React.FC<IProps> = props => {
-	// 모바일 주소창 닫힘
-	useEffect(() => {
-		window.addEventListener(
-			'load',
-			() => {
-				setTimeout(() => window.scrollTo(0, 1), 100);
-			},
-			false
-		);
-	}, []);
-
 	return (
 		<MasterWrapper {...props}>
 			<div className='body-area'>
