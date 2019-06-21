@@ -15,7 +15,6 @@ interface IProps {
 	handleNavClick?: () => void;
 }
 
-/* display: ${(props: IProps) => (props.visible ? 'block' : 'none')}; */
 const LeftMenuWrapper = styled('div')<IProps>`
 	display: flex;
 	flex-direction: column;
