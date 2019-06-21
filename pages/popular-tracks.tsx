@@ -61,7 +61,7 @@ const PopularTracksWrapper = styled('div')<IProps>`
 			flex: 1 1 100;
 			font-size: 1.4rem;
 			border-bottom: 1px solid #adb5bd;
-			height: 7rem;
+			min-height: 7rem;
 		}
 
 		.youtube-wrapper {
