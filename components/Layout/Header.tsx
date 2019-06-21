@@ -24,12 +24,11 @@ const HeaderWrapper = styled.div`
 	border-bottom: solid 1px #868e96;
 
 	.search-area {
-		width: 85%;
-		text-align: right;
-		min-width: 18em;
-
+		flex: 1;
 		@media ${device.mobile} {
-			font-size: 0.6rem;
+		}
+
+		@media ${device.desktop + ',' + device.tablet} {
 		}
 
 		.search-box {
@@ -40,6 +39,7 @@ const HeaderWrapper = styled.div`
 			width: 50%;
 			min-width: 11.5em;
 			text-align: center;
+			font-size: 1rem;
 		}
 
 		.search-icon {
@@ -55,6 +55,13 @@ const HeaderWrapper = styled.div`
 			background-color: #f1f3f5;
 			&:hover {
 				background-color: #e9ecef;
+			}
+		}
+
+		@media ${device.mobile} {
+			.search-box,
+			.search-icon {
+				font-size: 0.7rem;
 			}
 		}
 	}
