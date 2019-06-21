@@ -15,7 +15,6 @@ const FooterWrapper = styled('div')`
 	justify-content: center;
 	align-items: center;
 	height: 65px;
-	/* border-bottom: 1px solid #868e96; */
 `;
 
 const Footer: React.FC<IProps> = props => (
