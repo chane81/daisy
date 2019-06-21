@@ -11,19 +11,16 @@ interface IProps {
 	store?: IStore;
 }
 
-const PopularTracksWrapper = styled('div')`
+const PopularTracksWrapper = styled('div')<IProps>`
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: end;
+	height: calc(100vh - 50px);
 
 	.youtube-wrapper {
 		display: flex;
 		flex-flow: column nowrap;
-		border-right: 1px solid #868e96;
-
-		/* 16:9 */
-		min-width: 55vw;
-		max-width: calc(16 * calc(100vh - 117px) / 9);
+		background-color: #f8f9fa;
 
 		div {
 			padding-right: -2px;
@@ -34,13 +31,9 @@ const PopularTracksWrapper = styled('div')`
 				display: block;
 				width: 100%;
 				min-height: calc(55vw * 9 / 16);
-				max-height: calc(100vh - 117px - 9.8rem);
+				max-height: calc(100vh - 51px - 9.8rem);
 			}
 		}
-	}
-
-	.thumbnail-list {
-		height: calc(100vh - 117px);
 	}
 
 	.youtube-title {
@@ -51,12 +44,15 @@ const PopularTracksWrapper = styled('div')`
 		font-family: 'TmonMonsori', sans-serif;
 		font-size: 2rem;
 		font-weight: 100;
-		max-width: calc(16 * calc(100vh - 117px) / 9);
 	}
 
 	@media ${device.desktop + ',' + device.tablet} {
 		.youtube-title {
 			flex: 1;
+		}
+
+		.youtube-wrapper {
+			min-width: 55vw;
 		}
 	}
 
@@ -68,32 +64,35 @@ const PopularTracksWrapper = styled('div')`
 			height: 7rem;
 		}
 
-		.thumbnail-card {
-			flex-flow: row nowrap;
-			flex: 1 25rem;
-			padding: 0 0 1rem 0;
-			border-top: none;
-			border-left: none;
-			border-right: none;
-			border-bottom: 1px solid #adb5bd;
-
-			img {
-				width: 10rem;
+		.youtube-wrapper {
+			.youtube {
+				height: calc(100vw * 9 / 16);
 			}
 		}
 
-		.thumbnail-list {
-			padding: 1rem 0 0 0;
-			height: calc(100vh - 35rem);
-		}
+		${(props: IProps) => {
+			const isLeftMenu = props.store!.uiModel.leftMenuVisible;
+
+			if (isLeftMenu) {
+				return css`
+					.youtube-wrapper {
+						.youtube {
+							height: calc((100vw - 11.4rem) * 9 / 16);
+						}
+					}
+				`;
+			} else {
+				return css`
+					.youtube-wrapper {
+						.youtube {
+							height: calc(100vw * 9 / 16);
+						}
+					}
+				`;
+			}
+		}};
 
 		flex-flow: column nowrap;
-	}
-
-	@media ${device.desktop} {
-		.thumbnail-card {
-			flex: 1 1 13rem;
-		}
 	}
 `;
 
@@ -134,7 +133,7 @@ class PopularTracks extends Component<IProps> {
 
 		return (
 			<Master>
-				<PopularTracksWrapper>
+				<PopularTracksWrapper {...this.props}>
 					<div className='youtube-wrapper'>
 						<YouTube
 							className='youtube'
