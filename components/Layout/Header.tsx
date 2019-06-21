@@ -25,11 +25,6 @@ const HeaderWrapper = styled.div`
 
 	.search-area {
 		flex: 1;
-		@media ${device.mobile} {
-		}
-
-		@media ${device.desktop + ',' + device.tablet} {
-		}
 
 		.search-box {
 			border: solid 1px #dee2e6;
@@ -39,7 +34,6 @@ const HeaderWrapper = styled.div`
 			width: 50%;
 			min-width: 11.5em;
 			text-align: center;
-			font-size: 1rem;
 		}
 
 		.search-icon {
@@ -55,6 +49,13 @@ const HeaderWrapper = styled.div`
 			background-color: #f1f3f5;
 			&:hover {
 				background-color: #e9ecef;
+			}
+		}
+
+		@media ${device.desktop + ',' + device.tablet} {
+			.search-box,
+			.search-icon {
+				font-size: 1rem;
 			}
 		}
 
