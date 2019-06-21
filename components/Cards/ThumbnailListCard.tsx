@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import ThumbnailCard from './ThumbnailCard';
 import { IApiItemsModelType } from '../../stores/storeTypes';
+import { device } from '../../library/styleHelper';
 
 /**
  * 설명:									썸네일리스트
@@ -19,8 +20,13 @@ const ThumbnailListCardWrapper = styled('div')<IProps>`
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
-	padding: 0 1.5rem 0 1.5rem;
-	height: calc(100vh - 115px);
+	padding: 0 0 0 1rem;
+
+	@media ${device.mobile} {
+		padding: 0.5rem 0 0 0;
+		overflow-y: scroll;
+		flex: 1;
+	}
 
 	/* scroll 바 */
 	overflow-y: auto;
