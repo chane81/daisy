@@ -1,12 +1,11 @@
 import { Component } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { inject, observer } from 'mobx-react';
 import Master from '../components/Layout/Master';
 import { IStore } from '../stores/storeTypes';
 import { device } from '../library/styleHelper';
 import ThumbnailListCardContainer from '../containers/Cards/ThumbnailListCardContainer';
 import YoutubePlayer from '../components/Player/YoutubePlayer';
-import LeftMenu from '../components/Layout/LeftMenu';
 
 interface IProps {
 	store?: IStore;
