@@ -1,97 +1,25 @@
 import { Component } from 'react';
 import styled, { css } from 'styled-components';
 import { inject, observer } from 'mobx-react';
-import YouTube from 'react-youtube';
 import Master from '../components/Layout/Master';
 import { IStore } from '../stores/storeTypes';
 import { device } from '../library/styleHelper';
 import ThumbnailListCardContainer from '../containers/Cards/ThumbnailListCardContainer';
+import YoutubePlayer from '../components/Player/YoutubePlayer';
+import LeftMenu from '../components/Layout/LeftMenu';
 
 interface IProps {
 	store?: IStore;
+	leftMenuVisible?: boolean;
 }
 
-const PopularTracksWrapper = styled('div')<IProps>`
+const PopularTracksWrapper = styled('div')`
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: end;
 	height: calc(100vh - 50px);
 
-	.youtube-wrapper {
-		display: flex;
-		flex-flow: column nowrap;
-		background-color: #f8f9fa;
-
-		div {
-			padding-right: -2px;
-			/* 16:9 */
-			/* width:height ratio = 16/9 = 1.778 */
-			/* height:width ratio = 9/16 = .5625 */
-			.youtube {
-				display: block;
-				width: 100%;
-				min-height: calc(55vw * 9 / 16);
-				max-height: calc(100vh - 51px - 9.8rem);
-			}
-		}
-	}
-
-	.youtube-title {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 9.8rem;
-		font-family: 'TmonMonsori', sans-serif;
-		font-size: 2rem;
-		font-weight: 100;
-	}
-
-	@media ${device.desktop + ',' + device.tablet} {
-		.youtube-title {
-			flex: 1;
-		}
-
-		.youtube-wrapper {
-			min-width: 55vw;
-		}
-	}
-
 	@media ${device.mobile} {
-		.youtube-title {
-			flex: 1 1 100;
-			font-size: 1.4rem;
-			border-bottom: 1px solid #adb5bd;
-			min-height: 7rem;
-		}
-
-		.youtube-wrapper {
-			.youtube {
-				height: calc(100vw * 9 / 16);
-			}
-		}
-
-		${(props: IProps) => {
-			const isLeftMenu = props.store!.uiModel.leftMenuVisible;
-
-			if (isLeftMenu) {
-				return css`
-					.youtube-wrapper {
-						.youtube {
-							height: calc((100vw - 11.4rem) * 9 / 16);
-						}
-					}
-				`;
-			} else {
-				return css`
-					.youtube-wrapper {
-						.youtube {
-							height: calc(100vw * 9 / 16);
-						}
-					}
-				`;
-			}
-		}};
-
 		flex-flow: column nowrap;
 	}
 `;
@@ -130,23 +58,18 @@ class PopularTracks extends Component<IProps> {
 
 	public render() {
 		const { playerModel } = this.props.store!;
+		const { uiModel } = this.props.store!;
 
 		return (
 			<Master>
-				<PopularTracksWrapper {...this.props}>
-					<div className='youtube-wrapper'>
-						<YouTube
-							className='youtube'
-							videoId={playerModel.videoId}
-							opts={playerModel.opts}
-							onReady={this.handleReady}
-						/>
-						<div
-							className='youtube-title'
-							dangerouslySetInnerHTML={{ __html: playerModel.title }}
-						/>
-					</div>
-
+				<PopularTracksWrapper>
+					<YoutubePlayer
+						videoId={playerModel.videoId}
+						title={playerModel.title}
+						opts={playerModel.opts}
+						leftMenuVisible={uiModel.leftMenuVisible}
+						handleReady={this.handleReady}
+					/>
 					<ThumbnailListCardContainer
 						className='thumbnail-list'
 						handleThumbnailClick={this.handleThumbnailClick}
