@@ -40,7 +40,7 @@ const YoutubePlayerWrapper = styled('div')<IProps>`
 			width: 100%;
 			min-height: calc(55vw * 9 / 16);
 			max-height: calc(100vh - 51px - 6rem);
-			transition: height 0.2s linear;
+			transition: height 0.3s ease-in-out;
 		}
 	}
 
@@ -48,11 +48,10 @@ const YoutubePlayerWrapper = styled('div')<IProps>`
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 6rem;
+		min-height: 6rem;
 		font-family: 'TmonMonsori', sans-serif;
 		font-size: 2rem;
 		font-weight: 100;
-		overflow-y: hidden;
 	}
 
 	@media ${device.desktop + ',' + device.tablet} {
