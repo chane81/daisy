@@ -40,7 +40,7 @@ const YoutubePlayerWrapper = styled('div')<IProps>`
 			width: 100%;
 			min-height: calc(55vw * 9 / 16);
 			max-height: calc(100vh - 51px - 6rem);
-			transition: height 0.3s ease-in-out;
+			transition: height 0.3s cubic-bezier(0.01, 1.01, 0.71, 0.99);
 		}
 	}
 
