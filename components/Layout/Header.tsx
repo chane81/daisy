@@ -64,6 +64,10 @@ const HeaderWrapper = styled.div`
 			.search-icon {
 				font-size: 0.7rem;
 			}
+
+			.search-icon {
+				margin-right: 0;
+			}
 		}
 	}
 `;
