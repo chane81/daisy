@@ -29,7 +29,7 @@ class PopularTracks extends Component<IProps> {
 
 		// 인기트랙 불러오기
 		this.props.store!.apiModel.getPlayListItems(
-			'PLTDluH66q5mpm-Bsq3GlwjMOHITt2bwXE',
+			process.env.YOUTUBE_API_POPULAR_TRACK_PLAYLIST_ID!,
 			20
 		);
 	}

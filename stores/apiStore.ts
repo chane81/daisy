@@ -1,6 +1,7 @@
 import { flow, Instance, types } from 'mobx-state-tree';
 import { getPlayListItems, getSearch } from '../apis/youtubeApi';
 import apiItemsStore from './apiItemsStore';
+import { IApiItemsModelType } from './apiItemsStore';
 
 const model = types
 	.model('apiModel', {
