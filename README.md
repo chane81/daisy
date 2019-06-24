@@ -345,16 +345,41 @@
   > ![](/static/images/mobx_warning_1.png)
 
   - 위의 그림과 같이 process.env.NODE_ENV 가 번들러에서 세팅이 되어있지 않다 라는 경고 메시지가 나온다.
-  - 이부분은 웹팩설정에서 아래와 같이 NODE_ENV 를 추가해주면 경고 메시지가 나오지 않고 해결이 된다.
-  - 아래는 next.config.js 의 웹팩 설정부분
-    ```js
-    new webpack.DefinePlugin({
-    	...env.stringified,
-    	'process.env.NODE_ENV': JSON.stringify(
-    		options.dev ? 'development' : 'production'
-    	)
-    });
-    ```
+  - 이부분의 의미는 minify 했는데 이것은 'production'모드 에서 쓰이는 것이므로 'process.env.NODE_ENV' 가 세팅이 되어있지 않다라는 의미이다.
+  - development 모드에서는 필요한 부분이 아니고 배포버전에서 'NODE_ENV' 가 세팅이 잘 되어있는지 체킹하는 부분이므로 env 환경설정에서 개발모드에서는 ignore 하도록 설정해주면 된다.
+  - 체킹하는 mobx 모듈 설정부분
+    - 모듈 위치:
+      > \node_modules\mobx\lib\mobx.module.js
+    - 모듈 해당 소스 부분:
+      ```js
+      if (
+      	testCodeMinification.name !== 'testCodeMinification' &&
+      	process.env.NODE_ENV !== 'production' &&
+      	process.env.IGNORE_MOBX_MINIFY_WARNING !== 'true'
+      ) {
+      	// trick so it doesn't get replaced
+      	var varName = ['process', 'env', 'NODE_ENV'].join('.');
+      	console.warn(
+      		"[mobx] you are running a minified build, but '" +
+      			varName +
+      			"' was not set to 'production' in your bundler. This results in an unnecessarily large and slow bundle"
+      	);
+      }
+      ```
+
+  ```js
+  const envVal = {
+    // 개발환경 변수
+  {
+      IGNORE_MOBX_MINIFY_WARNING: 'true',
+     [기타설정]
+    },
+    // 실서버환경 변수
+  {
+      IGNORE_MOBX_MINIFY_WARNING: 'false',
+      [기타설정]
+  }
+  ```
 
 - ## 웹펙에서 소스난독화/압축화를 할 때 기존에는 uglify 플러그인을 썼지만 아래 그림과 같이 deprecated 가 되었다.
 
