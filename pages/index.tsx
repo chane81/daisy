@@ -1,16 +1,6 @@
-import { inject, observer } from 'mobx-react';
-import Link from 'next/link';
-import { Component } from 'react';
+import React from 'react';
 import PopularTracks from './popular-tracks';
 
-interface IProps {
-	store?: any;
-}
+const Index: React.FC = () => <PopularTracks />;
 
-class Index extends Component<IProps> {
-	public render() {
-		return <PopularTracks />;
-	}
-}
-
-export default inject(({ store }) => ({ store }))(observer(Index));
+export default Index;
