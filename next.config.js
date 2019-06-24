@@ -9,7 +9,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const withSourceMaps = require('@zeit/next-source-maps')
 const withPlugins = require('next-compose-plugins');
 
-
 module.exports = withPlugins([
   [withSourceMaps],
   [withTypescript],
@@ -64,8 +63,7 @@ module.exports = withPlugins([
 
       // ENV 변수 설정
       new webpack.DefinePlugin({
-        ...env.stringified,
-        'process.env.NODE_ENV': JSON.stringify(options.dev ? 'development' : 'production')
+        ...env.stringified
       })
     ];
 
