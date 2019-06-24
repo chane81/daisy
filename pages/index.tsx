@@ -1,7 +1,6 @@
 import { inject, observer } from 'mobx-react';
 import Link from 'next/link';
 import { Component } from 'react';
-import Master from '../components/Layout/Master';
 import PopularTracks from './popular-tracks';
 
 interface IProps {
