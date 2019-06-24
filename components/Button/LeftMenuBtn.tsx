@@ -8,6 +8,8 @@ import Router from 'next/router';
  * iconClassName: 	fontawesome 의 아이콘 className(ex. fas fa-fire fa-lg)
  * btnTextName: 		버튼 표시 이름
  * depth:						뎁스증가에 따라서 오른쪽으로 컨텐츠가 이동함
+ * linkUrl:					링크 url
+ * isActive:				활성 상태인지 여부 true/false
  */
 interface IProps {
 	className?: string;
@@ -15,6 +17,7 @@ interface IProps {
 	btnTextName?: string;
 	depth?: number;
 	linkUrl?: string;
+	isActive?: boolean;
 }
 
 const LeftMenuBtnWrapper = styled('div')<IProps>`
@@ -27,10 +30,20 @@ const LeftMenuBtnWrapper = styled('div')<IProps>`
 	font-family: 'Noto Sans KR', sans-serif;
 	transition: background-color 0.2s ease-in-out;
 
-	:hover {
-		background-color: #e9ecef;
-		cursor: pointer;
-	}
+	${(props: IProps) =>
+		// 활성화 상태일 때
+		(!!props.isActive &&
+			css`
+				background-color: #e9ecef;
+				cursor: pointer;
+			`) ||
+		// 비활성화 상태일 때
+		css`
+			:hover {
+				background-color: #e9ecef;
+				cursor: pointer;
+			}
+		`};
 
 	${(props: IProps) => {
 		const space =
