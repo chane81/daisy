@@ -1,27 +1,11 @@
 import { Component } from 'react';
-import styled from 'styled-components';
 import { inject, observer } from 'mobx-react';
-import Master from '../components/Layout/Master';
 import { IStore } from '../stores/storeTypes';
-import { device } from '../library/styleHelper';
-import ThumbnailListCardContainer from '../containers/Cards/ThumbnailListCardContainer';
-import YoutubePlayer from '../components/Player/YoutubePlayer';
+import PopularTrackTemplate from '../components/PagesTemplate/PopularTrackTemplate';
 
 interface IProps {
 	store?: IStore;
-	leftMenuVisible?: boolean;
 }
-
-const PopularTracksWrapper = styled('div')`
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: end;
-	height: calc(100vh - 50px);
-
-	@media ${device.mobile} {
-		flex-flow: column nowrap;
-	}
-`;
 
 class PopularTracks extends Component<IProps> {
 	public constructor(props) {
@@ -60,21 +44,13 @@ class PopularTracks extends Component<IProps> {
 		const { uiModel } = this.props.store!;
 
 		return (
-			<Master>
-				<PopularTracksWrapper>
-					<YoutubePlayer
-						videoId={playerModel.videoId}
-						title={playerModel.title}
-						opts={playerModel.opts}
-						leftMenuVisible={uiModel.leftMenuVisible}
-						handleReady={this.handleReady}
-					/>
-					<ThumbnailListCardContainer
-						className='thumbnail-list'
-						handleThumbnailClick={this.handleThumbnailClick}
-					/>
-				</PopularTracksWrapper>
-			</Master>
+			<PopularTrackTemplate
+				className='popular-tracks'
+				playerOptions={playerModel}
+				leftMenuVisible={uiModel.leftMenuVisible}
+				handleYoutubeReady={this.handleReady}
+				handleThumbnailClick={this.handleThumbnailClick}
+			></PopularTrackTemplate>
 		);
 	}
 }
