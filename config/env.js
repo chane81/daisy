@@ -22,6 +22,7 @@ function getClientConfig() {
 	const envVal = {
     // 개발환경 변수
 		development: {
+      IGNORE_MOBX_MINIFY_WARNING: 'true',
       JWT_PRIVATE_KEY: 'dev9254',
       YOUTUBE_API_BASE_URL: 'https://www.googleapis.com/youtube/v3',
       YOUTUBE_API_KEY: 'AIzaSyDp1dL6gomS_0dMQZyKsgTBkdTB9xGwBHQ',
@@ -29,6 +30,7 @@ function getClientConfig() {
     },
     // 실서버환경 변수
 		production: {
+      IGNORE_MOBX_MINIFY_WARNING: 'false',
       JWT_PRIVATE_KEY: 'black2284',
       YOUTUBE_API_BASE_URL: 'https://www.googleapis.com/youtube/v3',
       YOUTUBE_API_KEY: 'AIzaSyDp1dL6gomS_0dMQZyKsgTBkdTB9xGwBHQ',
