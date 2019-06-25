@@ -5,6 +5,13 @@ import { device } from '../../library/styleHelper';
 /**
  * 설명:						썸네일 카드
  * className:				css class 명
+ * width:						width
+ * height:					height
+ * imageUrl:				이미지 url
+ * videoId:					유튜브 video ID
+ * title:						제목
+ * flexBasis:				flex basis css 값
+ * handleClick:			클릭 이벤트 핸들러
  */
 interface IProps {
 	className?: string;
