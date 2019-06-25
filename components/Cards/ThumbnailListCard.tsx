@@ -20,6 +20,8 @@ interface IProps {
 		channelId: string
 	) => void;
 	cardFlexBasis?: string;
+	cardWidth?: string;
+	cardHeight?: string;
 }
 
 const ThumbnailListCardWrapper = styled('div')<IProps>`
@@ -64,6 +66,8 @@ const ThumbnailListCard: React.FC<IProps> = props => {
 					videoId={data.videoId}
 					imageUrl={data.thumbnails!.high!.url}
 					title={data.title}
+					width={props.cardWidth}
+					height={props.cardHeight}
 					flexBasis={props.cardFlexBasis}
 					handleClick={props.handleThumbnailClick}
 				/>
