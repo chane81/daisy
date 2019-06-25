@@ -22,50 +22,55 @@ const model = types
 		})
 	})
 	.actions(self => ({
-		setPlayer(player: any) {
-			self.player = player;
+		/**
+		 *
+		 * player:	 유튜브플레이어 객체
+		 * videoId:		video 아이디
+		 * title:			제목
+		 */
+		setPlayer({ player = null, videoId = '', title = '' }) {
+			self.player = !!player ? player : self.player;
+			self.videoId = !!videoId ? videoId : self.videoId;
+			self.title = !!title ? title : self.title;
 		},
+		/** play */
 		setPlay() {
 			setTimeout(() => {
 				self.player.playVideo();
 			});
 		},
+		/** pause */
 		setPause() {
 			setTimeout(() => {
 				self.player.pauseVideo();
 			});
 		},
+		/** stop */
 		setStop() {
 			setTimeout(() => {
 				self.player.stopVideo();
 			});
 		},
-		setVideoId(videoId: string) {
-			self.videoId = videoId;
-		},
-		setTitle(title: string) {
-			self.title = title;
-		},
+		/** 플레이어 높이, 넓이, 자동플레이, 컨트롤 visible 여부 설정 */
 		setOpts(
 			height?: string,
 			width?: string,
 			autoplay?: 0 | 1,
 			controls?: 0 | 1 | 2
 		) {
-			if (height && self.opts.height !== height) {
-				console.log('height:', height);
+			if (!!height && self.opts.height !== height) {
 				self.opts.height = height;
 			}
 
-			if (width && self.opts.width !== width) {
+			if (!!width && self.opts.width !== width) {
 				self.opts.width = width;
 			}
 
-			if (autoplay && self.opts.playerVars.autoplay !== autoplay) {
+			if (!!autoplay && self.opts.playerVars.autoplay !== autoplay) {
 				self.opts.playerVars.autoplay = autoplay;
 			}
 
-			if (controls && self.opts.playerVars.controls !== controls) {
+			if (!!controls && self.opts.playerVars.controls !== controls) {
 				self.opts.playerVars.controls = controls;
 			}
 		}
