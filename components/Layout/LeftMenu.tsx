@@ -43,11 +43,11 @@ const LeftMenu: React.FC<IProps> = props => {
 				iconClassName='fas fa-fire fa-lg'
 				btnTextName='Popular Tracks'
 				linkUrl='/popular-tracks'
-				isActive={true}
 			/>
 			<LeftMenuBtn
 				iconClassName='fas fa-star fa-lg'
-				btnTextName='Top 100'
+				btnTextName='Channel List'
+				linkUrl='/channel-list'
 			/>
 			<LeftMenuBtn
 				iconClassName='fas fa-user fa-lg'

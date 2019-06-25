@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Router from 'next/router';
+import Router, { withRouter, SingletonRouter } from 'next/router';
 
 /**
  * 설명:						레프트 메뉴 버튼 컴포넌트
@@ -10,6 +10,7 @@ import Router from 'next/router';
  * depth:						뎁스증가에 따라서 오른쪽으로 컨텐츠가 이동함
  * linkUrl:					링크 url
  * isActive:				활성 상태인지 여부 true/false
+ * router:					withRouter에 의해 주입된 prop
  */
 interface IProps {
 	className?: string;
@@ -18,6 +19,7 @@ interface IProps {
 	depth?: number;
 	linkUrl?: string;
 	isActive?: boolean;
+	router?: SingletonRouter;
 }
 
 const LeftMenuBtnWrapper = styled('div')<IProps>`
@@ -29,21 +31,15 @@ const LeftMenuBtnWrapper = styled('div')<IProps>`
 	line-height: 3.5rem;
 	font-family: 'Noto Sans KR', sans-serif;
 	transition: background-color 0.2s ease-in-out;
+	cursor: pointer;
 
-	${(props: IProps) =>
-		// 활성화 상태일 때
-		(!!props.isActive &&
-			css`
-				background-color: #e9ecef;
-				cursor: pointer;
-			`) ||
-		// 비활성화 상태일 때
-		css`
-			:hover {
-				background-color: #e9ecef;
-				cursor: pointer;
-			}
-		`};
+	/** 강제 활성화 했거나 또는 현재 라우트에 해당하는 버튼일 경우 활성화 함 */
+	background-color: ${(props: IProps) =>
+		(!!props.isActive || props.linkUrl! === props.router!.route) &&
+		'#e9ecef;'};
+	:hover {
+		background-color: #e9ecef;
+	}
 
 	${(props: IProps) => {
 		const space =
@@ -78,4 +74,4 @@ const LeftMenuBtn: React.FC<IProps> = props => {
 	);
 };
 
-export default LeftMenuBtn;
+export default withRouter(LeftMenuBtn);
