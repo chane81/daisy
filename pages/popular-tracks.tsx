@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { IStore } from '../stores/storeTypes';
-import PopularTrackTemplate from '../components/PagesTemplate/PopularTrackTemplate';
+import PopularTrackSection from '../components/PagesSection/PopularTrackSection';
 
 /**
  * 설명:	인기트랙 page
@@ -25,21 +25,25 @@ class PopularTracks extends Component<IProps> {
 	// 플레이어 ready 시에 스토어에 플레이어객체 저장
 	public handleReady = e => {
 		const { apiModel, playerModel } = this.props.store!;
-		const item = apiModel.playlistItems[0];
 
-		// 디폴트 videoId 세팅
-		playerModel.setVideoId(item.videoId);
-		playerModel.setPlayer(e.target);
-		playerModel.setTitle(item.title);
-		playerModel.setStop();
+		if (apiModel.playlistItems.length > 0) {
+			const { videoId, title } = apiModel.playlistItems[0];
+
+			// 디폴트 videoId 세팅
+			playerModel.setPlayer({
+				player: e.target,
+				videoId,
+				title
+			});
+			playerModel.setStop();
+		}
 	};
 
 	// 썸네일 이미지 클릭시 유튜브 Play
 	public handleThumbnailClick = (videoId: string, title: string) => {
 		const { playerModel } = this.props.store!;
 
-		playerModel.setVideoId(videoId);
-		playerModel.setTitle(title);
+		playerModel.setPlayer({ videoId, title });
 		playerModel.setPlay();
 	};
 
@@ -48,13 +52,13 @@ class PopularTracks extends Component<IProps> {
 		const { uiModel } = this.props.store!;
 
 		return (
-			<PopularTrackTemplate
+			<PopularTrackSection
 				className='popular-tracks'
 				playerOptions={playerModel}
 				leftMenuVisible={uiModel.leftMenuVisible}
 				handleYoutubeReady={this.handleReady}
 				handleThumbnailClick={this.handleThumbnailClick}
-			></PopularTrackTemplate>
+			></PopularTrackSection>
 		);
 	}
 }
