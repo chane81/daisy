@@ -21,7 +21,7 @@ class HeaderContainer extends Component<IProps> {
 
 	private handleSearchClick = (searchText: string) => {
 		const { apiModel } = this.props.store!;
-		apiModel.getSearch(searchText, 20);
+		apiModel.getVideoSearch(searchText, 20);
 	};
 
 	public render() {
