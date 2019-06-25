@@ -2,25 +2,19 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import YouTube from 'react-youtube';
 import { device } from '../../library/styleHelper';
-
-interface IOpts {
-	height?: string;
-	width?: string;
-	playerVars?: {
-		autoplay: 0 | 1;
-		controls: 0 | 1 | 2;
-	};
-}
+import { IPlayerModelType } from '../../stores/storeTypes';
+import { observer } from 'mobx-react';
 
 /**
- * 설명:						썸네일 카드
+ * 설명: 						유튜브 플레이어 컴포넌트
  * className:				css class 명
+ * playerOptions:		유튜브 플레이어 옵션
+ * leftMenuVisible:	레프트메뉴 visible true/false
+ * handleReady:			유튜브 플레이어 ready 이벤트 핸들러
  */
 interface IProps {
 	className?: string;
-	videoId: string;
-	title: string;
-	opts: IOpts;
+	playerOptions: IPlayerModelType;
 	leftMenuVisible?: boolean;
 	handleReady: (e: any) => void;
 }
@@ -79,25 +73,19 @@ const YoutubePlayerWrapper = styled('div')<IProps>`
 
 const YoutubePlayer: React.FC<IProps> = props => {
 	return (
-		<YoutubePlayerWrapper
-			videoId={props.videoId}
-			title={props.title}
-			opts={props.opts}
-			leftMenuVisible={props.leftMenuVisible}
-			handleReady={props.handleReady}
-		>
+		<YoutubePlayerWrapper {...props}>
 			<YouTube
 				className='youtube'
-				videoId={props.videoId}
-				opts={props.opts}
+				videoId={props.playerOptions.videoId}
+				opts={props.playerOptions.opts}
 				onReady={props.handleReady}
 			/>
 			<div
 				className='youtube-title'
-				dangerouslySetInnerHTML={{ __html: props.title }}
+				dangerouslySetInnerHTML={{ __html: props.playerOptions.title }}
 			/>
 		</YoutubePlayerWrapper>
 	);
 };
 
-export default YoutubePlayer;
+export default observer(YoutubePlayer);
