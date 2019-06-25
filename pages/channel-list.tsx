@@ -16,7 +16,7 @@ class ChannelList extends Component<IProps> {
 		super(props);
 
 		// k-pop 채널 불러오기
-		this.props.store!.apiModel.getChannelSearch('k-pop official', 4);
+		this.props.store!.apiModel.getChannelSearch('k-pop official', 12);
 	}
 
 	// 썸네일 이미지 클릭시 유튜브 Play
