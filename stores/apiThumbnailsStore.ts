@@ -3,8 +3,8 @@ import { Instance, types } from 'mobx-state-tree';
 /** 유튜브 API - 썸네일 사이즈, URL 정보 모델 */
 const apiThumbnailDetailModel = types.model('apiThumbnailDetailModel', {
 	url: types.string,
-	width: types.number,
-	height: types.number
+	width: types.maybe(types.number),
+	height: types.maybe(types.number)
 });
 
 /** 유튜브 API - 썸네일 사이즈별 모델 */
