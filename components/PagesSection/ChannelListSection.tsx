@@ -31,7 +31,8 @@ const ChannelListTemplate: React.FC<IProps> = props => {
 				<ThumbnailListCardContainer
 					className='thumbnail-list'
 					handleThumbnailClick={props.handleThumbnailClick}
-					cardFlexBasis='12rem'
+					cardWidth='12rem'
+					cardFlexBasis='none'
 				></ThumbnailListCardContainer>
 			</ChannelListWrapper>
 		</Master>
