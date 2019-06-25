@@ -1,7 +1,7 @@
-import { flow, Instance, types } from 'mobx-state-tree';
+import { flow, Instance, types, applySnapshot } from 'mobx-state-tree';
 import { getPlayListItems, getSearch } from '../apis/youtubeApi';
 import apiItemsStore from './apiItemsStore';
-import { IApiItemsModelType } from './apiItemsStore';
+import _ from 'lodash';
 
 const model = types
 	.model('apiModel', {
@@ -20,15 +20,51 @@ const model = types
 			playlistId: string,
 			maxResults: number
 		) {
-			const res = yield getPlayListItems(playlistId, maxResults);
+			// 명시적 초기화
+			applySnapshot(self, defaultValue);
 
-			self.playlistItems = res;
+			// data get
+			self.playlistItems = yield getPlayListItems(playlistId, maxResults);
 		}),
-		getSearch: flow(function*(searchText: string, maxResults: number) {
-			const res = yield getSearch(searchText, maxResults);
+		/**
+		 * video 검색목록 가져오기
+		 * searchText: 검색텍스트
+		 * maxResults: 최대 개수
+		 */
+		getVideoSearch: flow(function*(
+			searchText: string,
+			maxResults: number
+		) {
+			// 명시적 초기화
+			applySnapshot(self, defaultValue);
 
-			self.playlistItems = res;
-		})
+			// data get
+			self.playlistItems = yield getSearch({ searchText, maxResults });
+		}),
+		/**
+		 * channel 검색목록 가져오기
+		 * searchText: 검색텍스트
+		 * maxResults: 최대 개수
+		 */
+		getChannelSearch: flow(function*(
+			searchText: string,
+			maxResults: number
+		) {
+			// 명시적 초기화
+			applySnapshot(self, defaultValue);
+
+			// data get
+			self.playlistItems = yield getSearch({
+				searchText,
+				maxResults,
+				order: 'viewcount',
+				type: 'channel'
+			});
+		}),
+		/** 초기화 */
+		setInit() {
+			applySnapshot(self, defaultValue);
+		}
 	}));
 
 const defaultValue = {
