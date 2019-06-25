@@ -3,6 +3,10 @@ import { inject, observer } from 'mobx-react';
 import { IStore } from '../stores/storeTypes';
 import PopularTrackTemplate from '../components/PagesTemplate/PopularTrackTemplate';
 
+/**
+ * 설명:	인기트랙 page
+ * store:	스토어
+ */
 interface IProps {
 	store?: IStore;
 }
