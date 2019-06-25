@@ -11,7 +11,12 @@ import { IStore } from '../../stores/storeTypes';
 interface IProps {
 	className?: string;
 	store?: IStore;
-	handleThumbnailClick?: (video: string, title: string) => void;
+	handleThumbnailClick?: (
+		video: string,
+		title: string,
+		channelId: string
+	) => void;
+	cardFlexBasis?: string;
 }
 
 class ThumbnailListCardContainer extends Component<IProps> {
@@ -21,6 +26,7 @@ class ThumbnailListCardContainer extends Component<IProps> {
 				className={this.props.className}
 				playListItems={this.props.store!.apiModel.playlistItems}
 				handleThumbnailClick={this.props.handleThumbnailClick}
+				cardFlexBasis={this.props.cardFlexBasis}
 			/>
 		);
 	}

@@ -9,6 +9,7 @@ import { device } from '../../library/styleHelper';
  * height:					height
  * imageUrl:				이미지 url
  * videoId:					유튜브 video ID
+ * channelId:				유튜브 channel ID
  * title:						제목
  * flexBasis:				flex basis css 값
  * handleClick:			클릭 이벤트 핸들러
@@ -19,9 +20,14 @@ interface IProps {
 	height?: string;
 	imageUrl?: string;
 	videoId?: string;
+	channelId?: string;
 	title?: string;
 	flexBasis?: string;
-	handleClick?: (videoId: string, title: string) => void;
+	handleClick?: (
+		videoId: string,
+		title: string,
+		channelId: string
+	) => void;
 }
 
 const ThumbnailCardWrapper = styled('div')<IProps>`
@@ -29,11 +35,12 @@ const ThumbnailCardWrapper = styled('div')<IProps>`
 	flex-flow: column wrap;
 	width: ${(props: IProps) => props.width};
 	height: ${(props: IProps) => props.height};
-	flex: 1 ${(props: IProps) => props.flexBasis};
+	flex: 1 1 ${(props: IProps) => props.flexBasis};
 
 	@media ${device.desktop + ',' + device.tablet} {
-		flex: 1 1 13rem;
-		margin: 0 0 0.5rem 0.5rem;
+		/* flex: 1 1 13rem; */
+		/* margin: 0 0 0.5rem 0.5rem; */
+		margin: 0 0.25rem 0.5rem 0.25rem;
 		img {
 			width: 100%;
 		}
@@ -79,7 +86,9 @@ const ThumbnailCard: React.FC<IProps> = props => {
 	return (
 		<ThumbnailCardWrapper
 			{...props}
-			onClick={() => props.handleClick!(props.videoId!, props.title!)}
+			onClick={() =>
+				props.handleClick!(props.videoId!, props.title!, props.channelId!)
+			}
 		>
 			<img src={props.imageUrl} />
 			<div

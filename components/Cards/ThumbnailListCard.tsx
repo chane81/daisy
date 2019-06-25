@@ -14,17 +14,23 @@ import { device } from '../../library/styleHelper';
 interface IProps {
 	className?: string;
 	playListItems?: IApiItemsModelType[];
-	handleThumbnailClick?: (videoId: string, title: string) => void;
+	handleThumbnailClick?: (
+		videoId: string,
+		title: string,
+		channelId: string
+	) => void;
+	cardFlexBasis?: string;
 }
 
 const ThumbnailListCardWrapper = styled('div')<IProps>`
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
-	padding: 0 0 0 1rem;
+	align-content: flex-start;
+	/* padding: 0 0 0 1rem; */
 
 	@media ${device.mobile} {
-		padding: 0.5rem 0 0 0;
+		/* padding: 0.5rem 0 0 0; */
 		overflow-y: scroll;
 		flex: 1;
 	}
@@ -58,7 +64,7 @@ const ThumbnailListCard: React.FC<IProps> = props => {
 					videoId={data.videoId}
 					imageUrl={data.thumbnails!.high!.url}
 					title={data.title}
-					flexBasis={'18.75rem'}
+					flexBasis={props.cardFlexBasis}
 					handleClick={props.handleThumbnailClick}
 				/>
 			))}
