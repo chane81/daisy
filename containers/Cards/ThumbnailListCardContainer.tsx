@@ -17,6 +17,8 @@ interface IProps {
 		channelId: string
 	) => void;
 	cardFlexBasis?: string;
+	cardWidth?: string;
+	cardHeight?: string;
 }
 
 class ThumbnailListCardContainer extends Component<IProps> {
@@ -27,6 +29,8 @@ class ThumbnailListCardContainer extends Component<IProps> {
 				playListItems={this.props.store!.apiModel.playlistItems}
 				handleThumbnailClick={this.props.handleThumbnailClick}
 				cardFlexBasis={this.props.cardFlexBasis}
+				cardHeight={this.props.cardHeight}
+				cardWidth={this.props.cardWidth}
 			/>
 		);
 	}
