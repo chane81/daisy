@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { device } from '../../library/styleHelper';
 import ThumbnailListCardContainer from '../../containers/Cards/ThumbnailListCardContainer';
-import YoutubePlayer from '../../components/Player/YoutubePlayer';
+import YoutubePlayer from '../Player/YoutubePlayer';
 import { IPlayerModelType } from '../../stores/storeTypes';
 import Master from '../Layout/Master';
 import { observer } from 'mobx-react';
@@ -20,7 +20,11 @@ interface IProps {
 	playerOptions: IPlayerModelType;
 	leftMenuVisible: boolean;
 	handleYoutubeReady: (e: any) => void;
-	handleThumbnailClick: (videoId: string, title: string) => void;
+	handleThumbnailClick: (
+		videoId: string,
+		title: string,
+		channelId: string
+	) => void;
 }
 
 const PopularTrackWrapper = styled('div')`
@@ -29,16 +33,24 @@ const PopularTrackWrapper = styled('div')`
 	justify-content: end;
 	height: calc(100vh - 50px);
 
+	.youtube-player {
+		padding-right: 0.7rem;
+	}
+
 	@media ${device.mobile} {
 		flex-flow: column nowrap;
+		.youtube-player {
+			padding-right: 0;
+		}
 	}
 `;
 
-const PopularTrackTemplate: React.FC<IProps> = props => {
+const PopularTrackSection: React.FC<IProps> = props => {
 	return (
 		<Master>
 			<PopularTrackWrapper>
 				<YoutubePlayer
+					className='youtube-player'
 					playerOptions={props.playerOptions}
 					leftMenuVisible={props.leftMenuVisible}
 					handleReady={props.handleYoutubeReady}
@@ -46,10 +58,11 @@ const PopularTrackTemplate: React.FC<IProps> = props => {
 				<ThumbnailListCardContainer
 					className='thumbnail-list'
 					handleThumbnailClick={props.handleThumbnailClick}
+					cardFlexBasis='13rem'
 				></ThumbnailListCardContainer>
 			</PopularTrackWrapper>
 		</Master>
 	);
 };
 
-export default observer(PopularTrackTemplate);
+export default observer(PopularTrackSection);
