@@ -8,6 +8,7 @@ import { device } from '../../library/styleHelper';
 /**
  * 설명:									썸네일리스트
  * className:							css class 명
+ * playListItems:					썸네일 리스트로 표시할 데이터들
  * handleThumbnailClick:	썸네일 클릭시 이벤트 핸들러
  */
 interface IProps {
