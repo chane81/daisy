@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import styled, { css, StyledComponent } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 import Link from 'next/link';
 
 /**
@@ -7,6 +7,8 @@ import Link from 'next/link';
  * className:				css class 명
  * btnTextName: 		버튼 표시 이름
  * btnKind:					버튼종류 - X: x 버튼,  A: arrow 버튼
+ * visible:					visible true/false
+ * handleNavClick:	클릭 이벤트 핸들러
  */
 interface IProps {
 	className?: string;
