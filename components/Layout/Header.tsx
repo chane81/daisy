@@ -4,10 +4,11 @@ import Navbar from '../Button/Navbar';
 import { device } from '../../library/styleHelper';
 
 /**
- * 설명:						헤더 컴포넌트, 검색바 네비바가 위치함
- * className:				css class 명
- * navbarVisible:		nav바 비져블 true/false
- * handleNavClick:	nav바 클릭 이벤트 핸들러
+ * 설명:								헤더 컴포넌트, 검색바 네비바가 위치함
+ * className:						css class 명
+ * navbarVisible:				nav바 비져블 true/false
+ * handleNavClick:			nav바 클릭 이벤트 핸들러
+ * handleSearchClick:		검색 클릭 이벤트 핸들러
  */
 interface IProps {
 	className?: string;
