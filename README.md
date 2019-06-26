@@ -412,9 +412,35 @@
     });
     ```
 
-# `heroku 클라이언트 URL`
+# `FIREBASE 배포`
 
-- https://daisy-app.herokuapp.com/
+- ## 순서
+
+  - firebase 웹사이트에 접속해서 프로젝트 생성 후 hosting 서비스 열기
+    > https://console.firebase.google.com/
+  - firebase-tools 설치
+    > yarn global add firebase-tools
+  - .gitignore 파일 설정
+
+    > .firebase/
+
+    > firebase.json
+
+    > .firebaserc
+
+  - firebase 관련 init 실행
+    > firebase init -> init 진행중 Hosting 선택 -> firebase 에서 생성한 프로젝트 선택
+  - 프로젝트 빌드
+    > yarn build
+  - firebase 배포
+    > firebase deploy
+
+# `서비스 url`
+
+- ## firebase
+  - https://daisy-42a16.web.app/
+- ## heroku
+  - https://daisy-app.herokuapp.com/
 
 # `Screenshot`
 
