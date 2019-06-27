@@ -4,8 +4,42 @@ import _ from 'lodash';
 const baseUrl = process.env.YOUTUBE_API_BASE_URL;
 const apiKey = process.env.YOUTUBE_API_KEY;
 
-// playlistId: 'PLTDluH66q5mpm-Bsq3GlwjMOHITt2bwXE'
-// maxResults: 10
+/**
+ * 유튜브의 미디어 단위
+ * 채널 > 플레이리스트 > 트렉리스트(Video List) > Video
+ */
+
+/**
+ * 유튜브 API - 채널ID에 존재하는 플레이리스트들 가져오기 API 호출
+ * 이 플레이리스트들의 ID를 이용해 그에 해당하는 비디오 트렉들을 가져온다.
+ * @param channelId 채널ID
+ * @param maxResults 최대출력 개수
+ */
+export const getChannelPlaylist = async (
+	channelId: string,
+	maxResults: number
+) => {
+	const url = `${baseUrl}/playlists`;
+
+	const {
+		data: { items }
+	} = await axios.get(url, {
+		params: {
+			key: apiKey,
+			maxResults,
+			part: 'snippet',
+			channelId
+		}
+	});
+
+	const result = _.map(items, data => ({
+		..._.pick(data, ['id']),
+		..._.pick(data, ['snippet']).snippet
+	}));
+
+	return result;
+};
+
 /**
  * 유튜브 API - 재생목록 가져오기 API 호출
  * @param playlistId 플레이리스트ID
