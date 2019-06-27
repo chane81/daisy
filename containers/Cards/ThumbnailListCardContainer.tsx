@@ -26,7 +26,7 @@ class ThumbnailListCardContainer extends Component<IProps> {
 		return (
 			<ThumbnailListCard
 				className={this.props.className}
-				playListItems={this.props.store!.apiModel.playlistItems}
+				apiItems={this.props.store!.apiModel.apiItems}
 				handleThumbnailClick={this.props.handleThumbnailClick}
 				cardFlexBasis={this.props.cardFlexBasis}
 				cardHeight={this.props.cardHeight}
