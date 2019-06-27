@@ -8,12 +8,12 @@ import { device } from '../../library/styleHelper';
 /**
  * 설명:									썸네일리스트
  * className:							css class 명
- * playListItems:					썸네일 리스트로 표시할 데이터들
+ * apiItems:							썸네일 리스트로 표시할 데이터들
  * handleThumbnailClick:	썸네일 클릭시 이벤트 핸들러
  */
 interface IProps {
 	className?: string;
-	playListItems?: IApiItemsModelType[];
+	apiItems?: IApiItemsModelType[];
 	handleThumbnailClick?: (
 		videoId: string,
 		title: string,
@@ -29,10 +29,8 @@ const ThumbnailListCardWrapper = styled('div')<IProps>`
 	flex-flow: row wrap;
 	justify-content: center;
 	align-content: flex-start;
-	/* padding: 0 0 0 1rem; */
 
 	@media ${device.mobile} {
-		/* padding: 0.5rem 0 0 0; */
 		overflow-y: scroll;
 		flex: 1;
 	}
@@ -59,11 +57,12 @@ const ThumbnailListCardWrapper = styled('div')<IProps>`
 const ThumbnailListCard: React.FC<IProps> = props => {
 	return (
 		<ThumbnailListCardWrapper className={props.className}>
-			{props.playListItems!.map(data => (
+			{props.apiItems!.map(data => (
 				<ThumbnailCard
 					key={data.id}
 					className={'thumbnail-card'}
 					videoId={data.videoId}
+					channelId={data.channelId}
 					imageUrl={data.thumbnails!.high!.url}
 					title={data.title}
 					width={props.cardWidth}
