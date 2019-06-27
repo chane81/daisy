@@ -347,6 +347,19 @@
   - 위의 그림과 같이 process.env.NODE_ENV 가 번들러에서 세팅이 되어있지 않다 라는 경고 메시지가 나온다.
   - 이부분의 의미는 minify 했는데 이것은 'production'모드 에서 쓰이는 것이므로 'process.env.NODE_ENV' 가 세팅이 되어있지 않다라는 의미이다.
   - development 모드에서는 필요한 부분이 아니고 배포버전에서 'NODE_ENV' 가 세팅이 잘 되어있는지 체킹하는 부분이므로 env 환경설정에서 개발모드에서는 ignore 하도록 설정해주면 된다.
+    ```js
+    const envVal = {
+    // 개발환경 변수
+    development: {
+      IGNORE_MOBX_MINIFY_WARNING: 'true',
+      [기타설정]
+    },
+    // 실서버환경 변수
+    production: {
+      IGNORE_MOBX_MINIFY_WARNING: 'false',
+      [기타설정]
+    }
+    ```
   - 체킹하는 mobx 모듈 설정부분
     - 모듈 위치:
       > \node_modules\mobx\lib\mobx.module.js
@@ -366,20 +379,6 @@
       	);
       }
       ```
-
-  ```js
-  const envVal = {
-    // 개발환경 변수
-  {
-      IGNORE_MOBX_MINIFY_WARNING: 'true',
-     [기타설정]
-    },
-    // 실서버환경 변수
-  {
-      IGNORE_MOBX_MINIFY_WARNING: 'false',
-      [기타설정]
-  }
-  ```
 
 - ## 웹펙에서 소스난독화/압축화를 할 때 기존에는 uglify 플러그인을 썼지만 아래 그림과 같이 deprecated 가 되었다.
 
