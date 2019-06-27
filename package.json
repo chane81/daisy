@@ -10,7 +10,7 @@
 		"tslint": "tslint -c tslint.json -p tsconfig.json",
 		"####### product mode": "",
 		"build": "yarn clean && next build && next export -o dist",
-		"start": "node server.js",
+		"start": "cross-env NODE_ENV=production node server.js",
 		"clean": "rimraf dist/* .next/* build/*",
 		"heroku-postbuild": "yarn build"
 	},
