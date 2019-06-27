@@ -31,6 +31,10 @@
 - test
   > jest + enzyme
 
+# 유튜브 미디어 서비스의 단위 큰것 -> 작은것
+
+- 채널 > 플레이리스트 > 트렉리스트(Video List) > Video
+
 # `Next.js 에서의 _document 와 _app 의 차이` 중요하니 알아두자
 
 - ## 공식문서 참조 URL
@@ -83,6 +87,45 @@
       }
     }
   ```
+
+# `Dynamic Routes 관련`
+
+- ## next.js 에서 `/channer-playlist:id` 와 같이 restful 라우트를 쓰고자 할 때 설정
+  - 참고 url
+    > https://github.com/fridays/next-routes
+  - yarn 설치
+    > yarn add next-routes
+  - 라우트설정 파일 생성
+    > /config/routes.js 참고
+    ```js
+    const routes = require('next-routes')
+                                                        // Name   Page      Pattern
+    module.exports = routes()                           // ----   ----      -----
+    .add('about')                                       // about  about     /about
+    .add('blog', '/blog/:slug')                         // blog   blog      /blog/:slug
+    .add('user', '/user/:id', 'profile')                // user   profile   /user/:id
+    .add('/:noname/:lang(en|es)/:wow+', 'complex')      // (none) complex   /:noname/:lang(en|es)/:wow+
+    .add({name: 'beta', pattern: '/v3', page: 'v3'})    // beta   v3        /v3
+    ```
+  - server.js 파일 생성
+    ```js
+    const routes = require('./config/routes');
+    const next = require('next');
+    const port = parseInt(process.env.PORT, 10) || 3000;
+    const dev = process.env.NODE_ENV !== 'production';
+    const nextApp = next({ dev });
+    const nextHandler = routes.getRequestHandler(nextApp);
+    const express = require('express');
+
+    nextApp.prepare().then(() => {
+      express().use(nextHandler).listen(port, err => {
+        if (err) throw err
+        console.log(`> Ready on port: ${port}`)
+      });
+    })
+    ```
+  - package.json 설정
+    > `"dev": "next"` => `"dev": "node server.js"` 으로 변경
 
 # `testing 관련`
 
