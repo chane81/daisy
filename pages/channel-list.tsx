@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { IStore } from '../stores/storeTypes';
 import ChannelListSection from '../components/PagesSection/ChannelListSection';
+import Router from 'next/router';
 
 /**
  * 설명:	채널리스트 page
@@ -26,6 +27,8 @@ class ChannelList extends Component<IProps> {
 		channelId: string
 	) => {
 		const { playerModel } = this.props.store!;
+
+		Router.push(`/channel-playlist/${channelId}`);
 	};
 
 	public render() {
