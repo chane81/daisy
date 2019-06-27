@@ -1,6 +1,13 @@
 {
 	// Editor 설정
-
+	"window.zoomLevel": 0,
+	"editor.suggest.localityBonus": true,
+	"editor.suggestSelection": "first",
+	"editor.quickSuggestions": {
+		"other": true,
+		"comments": false,
+		"strings": false
+	},
 	"editor.renderWhitespace": "all",
 	"editor.tabSize": 2,
 	"editor.renderIndentGuides": false,
