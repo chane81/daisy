@@ -21,6 +21,11 @@
 	},
 	"editor.fontFamily": "Consolas, 'Courier New', monospace, 'Segoe UI emoji', 'Segoe UI Symbol'",
 
+	// markdown
+	"[markdown]": {
+		"editor.formatOnSave": false
+	},
+
 	// eslint 설정
 	"eslint.autoFixOnSave": false,
 	"eslint.alwaysShowStatus": true,
