@@ -1,5 +1,9 @@
 import { flow, Instance, types, applySnapshot } from 'mobx-state-tree';
-import { getPlayListItems, getSearch } from '../apis/youtubeApi';
+import {
+	getPlayListItems,
+	getSearch,
+	getChannelPlaylist
+} from '../apis/youtubeApi';
 import apiItemsStore from './apiItemsStore';
 import _ from 'lodash';
 
@@ -9,10 +13,26 @@ const model = types
 		identifier: types.optional(types.identifier, 'apiModel'),
 
 		/** 재생목록 */
-		playlistItems: types.array(apiItemsStore.model)
+		apiItems: types.array(apiItemsStore.model)
 	})
 	.actions(self => ({
-		/* 재생목록가져오기
+		/**
+		 * 채널의 플레이리스트들 가져오기
+		 * channelId: 채널ID
+		 * maxResults: 최대 개수
+		 */
+		getChannelPlaylist: flow(function*(
+			channelId: string,
+			maxResults: number
+		) {
+			// 명시적 초기화
+			applySnapshot(self, defaultValue);
+
+			// data get
+			self.apiItems = yield getChannelPlaylist(channelId, maxResults);
+		}),
+		/**
+		 * 재생목록가져오기
 		 * playlistId: 가져올 플레이리스트 ID
 		 * maxResults: 최대 개수
 		 */
@@ -24,7 +44,7 @@ const model = types
 			applySnapshot(self, defaultValue);
 
 			// data get
-			self.playlistItems = yield getPlayListItems(playlistId, maxResults);
+			self.apiItems = yield getPlayListItems(playlistId, maxResults);
 		}),
 		/**
 		 * video 검색목록 가져오기
@@ -39,7 +59,7 @@ const model = types
 			applySnapshot(self, defaultValue);
 
 			// data get
-			self.playlistItems = yield getSearch({ searchText, maxResults });
+			self.apiItems = yield getSearch({ searchText, maxResults });
 		}),
 		/**
 		 * channel 검색목록 가져오기
@@ -54,7 +74,7 @@ const model = types
 			applySnapshot(self, defaultValue);
 
 			// data get
-			self.playlistItems = yield getSearch({
+			self.apiItems = yield getSearch({
 				searchText,
 				maxResults,
 				order: 'viewcount',
