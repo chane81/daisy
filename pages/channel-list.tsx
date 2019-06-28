@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { IStore } from '../stores/storeTypes';
-import ChannelListSection from '../components/PagesSection/ChannelListSection';
-import Router from 'next/router';
+import { IStore } from '../src/stores/storeTypes';
+import ChannelListSection from '../src/components/PagesSection/ChannelListSection';
+import { Router, withRouter } from '../src/library/routerHelper';
 
 /**
  * 설명:	채널리스트 page
@@ -28,7 +28,8 @@ class ChannelList extends Component<IProps> {
 	) => {
 		const { playerModel } = this.props.store!;
 
-		Router.push(`/channel-playlist/${channelId}`);
+		Router.pushRoute('channel-playlist', { channelId });
+		// Router.push('/popular-tracks');
 	};
 
 	public render() {

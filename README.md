@@ -92,15 +92,24 @@
 
 - ## next.js 에서 `/channer-playlist:id` 와 같이 restful 라우트를 쓰고자 할 때 설정
   - 참고 url
-    > https://github.com/fridays/next-routes
+    > https://github.com/fridays/next-routes\
+  - 이슈사항
+    > https://github.com/fridays/next-routes/issues/133
   - yarn 설치
     > yarn add next-routes
   - 라우트설정 파일 생성
     > /config/routes.js 참고
     ```js
-    const routes = require('next-routes')
-                                                        // Name   Page      Pattern
-    module.exports = routes()                           // ----   ----      -----
+    /**
+     * @typedef { import("next-routes").Registry } Registry}
+    */
+    const nextRoutes = require('next-routes');
+                                                 
+    /**
+     * @type {Registry}
+    */                                                  // Name   Page      Pattern
+    const routes = (module.exports = nextRoutes());     // ----   ----      -----
+    routes
     .add('about')                                       // about  about     /about
     .add('blog', '/blog/:slug')                         // blog   blog      /blog/:slug
     .add('user', '/user/:id', 'profile')                // user   profile   /user/:id
@@ -454,33 +463,7 @@
     });
     ```
 
-# `FIREBASE 배포`
-
-- ## 순서
-
-  - firebase 웹사이트에 접속해서 프로젝트 생성 후 hosting 서비스 열기
-    > https://console.firebase.google.com/
-  - firebase-tools 설치
-    > yarn global add firebase-tools
-  - .gitignore 파일 설정
-
-    > .firebase/
-
-    > firebase.json
-
-    > .firebaserc
-
-  - firebase 관련 init 실행
-    > firebase init -> init 진행중 Hosting 선택 -> firebase 에서 생성한 프로젝트 선택
-  - 프로젝트 빌드
-    > yarn build
-  - firebase 배포
-    > firebase deploy
-
 # `서비스 url`
-
-- ## firebase
-  - https://daisy-42a16.web.app/
 - ## heroku
   - https://daisy-app.herokuapp.com/
 

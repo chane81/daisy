@@ -5,8 +5,8 @@ import { NextComponentType } from 'next';
 import App, { Container } from 'next/app';
 import { object } from 'prop-types';
 import React from 'react';
-import Head from '../components/Layout/Head';
-import { initializeStore, IStore } from '../stores/store';
+import Head from '../src/components/Layout/Head';
+import { initializeStore, IStore } from '../src/stores/store';
 
 interface IProps {
 	isServer: boolean;
@@ -47,7 +47,7 @@ export default class MyApp extends App<IProps> {
 		// mst 디버깅 로그
 		if (process.env.NODE_ENV === 'development') {
 			// 크롬 console 에 해당값의 변화가 있을 때 나타나게 함
-			onPatch(this.store, (patch) => {
+			onPatch(this.store, patch => {
 				console.log(patch);
 			});
 

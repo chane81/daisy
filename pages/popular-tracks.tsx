@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { IStore } from '../stores/storeTypes';
-import PopularTrackSection from '../components/PagesSection/PopularTrackSection';
+import { IStore } from '../src/stores/storeTypes';
+import PopularTrackSection from '../src/components/PagesSection/PopularTrackSection';
 
 /**
  * 설명:	인기트랙 page

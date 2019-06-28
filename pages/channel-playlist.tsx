@@ -1,8 +1,9 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { IStore } from '../stores/storeTypes';
-import TrackListContainer from '../containers/TrackList/TrackListContainer';
-import Router, { withRouter, SingletonRouter } from 'next/router';
+import { IStore } from '../src/stores/storeTypes';
+// import TrackListContainer from '../src/containers/TrackList/TrackListContainer';
+import ChannelPlaylistSection from '../src/components/PagesSection/ChannelPlaylistSection';
+import { Router, withRouter } from '../src/library/routerHelper';
 
 /**
  * 설명:	채널리스트 page
@@ -17,12 +18,25 @@ class ChannelPlaylist extends Component<IProps> {
 		super(props);
 
 		// 해당 채널의 플레이 리스트 불러오기
-		const channelId = props.router.query.id;
+		const channelId = props.router.query.channelId;
+		console.log('ff:', channelId);
 		this.props.store!.apiModel.getChannelPlaylist(channelId, 10);
 	}
 
+	public handleThumbnailClick = (
+		videoId: string,
+		title: string,
+		channelId: string
+	) => {};
+
 	public render() {
-		return <TrackListContainer />;
+		return (
+			<div>
+				<ChannelPlaylistSection
+					handleThumbnailClick={this.handleThumbnailClick}
+				/>
+			</div>
+		);
 	}
 }
 

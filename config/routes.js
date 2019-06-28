@@ -1,6 +1,14 @@
+/**
+ * @typedef { import("next-routes").Registry } Registry}
+ */
 const nextRoutes = require('next-routes');
-const routes = (module.exports = nextRoutes());
 
-routes.add('popular-tracks', '(/|/popular-tracks)');
-routes.add('channel-list', '/channel-list');
-routes.add('channel-playlist', '/channel-playlist/:id');
+/**
+ * @type {Registry}
+ */
+(module.exports = nextRoutes())
+.add({name: 'root', page: '/popular-tracks', pattern: '/'})
+.add('popular-tracks', '/popular-tracks')
+.add('channel-list', '/channel-list')
+.add('channel-playlist','/channel-playlist/:channelId');
+  
