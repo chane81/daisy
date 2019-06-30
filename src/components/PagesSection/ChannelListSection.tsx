@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { device } from '../../library/styleHelper';
 import Master from '../Layout/Master';
 import { observer } from 'mobx-react';
-import ThumbnailListCardContainer from '../../containers/Cards/ThumbnailListCardContainer';
+import ThumbnailListCard from '../../components/Cards/ThumbnailListCard';
+import { IApiChannelModelType } from '../../stores/storeTypes';
 
 /**
  * 설명:									채널리스트 page 의 presentation 컴포넌트
@@ -11,6 +12,7 @@ import ThumbnailListCardContainer from '../../containers/Cards/ThumbnailListCard
  */
 interface IProps {
 	className?: string;
+	apiChannelItems?: IApiChannelModelType[];
 	handleThumbnailClick: (
 		videoId: string,
 		title: string,
@@ -43,12 +45,13 @@ const ChannelListTemplate: React.FC<IProps> = props => {
 	return (
 		<Master>
 			<ChannelListWrapper>
-				<ThumbnailListCardContainer
+				<ThumbnailListCard
 					className='thumbnail-list'
 					handleThumbnailClick={props.handleThumbnailClick}
+					apiItems={props.apiChannelItems}
 					cardWidth='12rem'
 					cardFlexBasis='none'
-				></ThumbnailListCardContainer>
+				></ThumbnailListCard>
 			</ChannelListWrapper>
 		</Master>
 	);
