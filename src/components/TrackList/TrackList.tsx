@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import { device } from '../../library/styleHelper';
-import ThumbnailListCardContainer from '../../containers/Cards/ThumbnailListCardContainer';
+import ThumbnailListCard from '../../components/Cards/ThumbnailListCard';
 import YoutubePlayerContainer from '../../containers/Player/YoutubePlayerContainer';
+import { IApiItemsModelType } from '../../stores/storeTypes';
+import _ from 'lodash';
 
 /**
  * 설명:									플레이 리스트 컴포넌트
@@ -11,7 +13,8 @@ import YoutubePlayerContainer from '../../containers/Player/YoutubePlayerContain
  */
 interface IProps {
 	className?: string;
-	handleThumbnailClick: (
+	apiItems?: IApiItemsModelType[];
+	handleThumbnailClick?: (
 		videoId: string,
 		title: string,
 		channelId: string
@@ -40,10 +43,11 @@ const TrackList: React.FC<IProps> = props => {
 	return (
 		<TrackListWrapper {...props}>
 			<YoutubePlayerContainer></YoutubePlayerContainer>
-			<ThumbnailListCardContainer
+			<ThumbnailListCard
 				handleThumbnailClick={props.handleThumbnailClick}
+				apiItems={props.apiItems}
 				cardFlexBasis='13rem'
-			></ThumbnailListCardContainer>
+			></ThumbnailListCard>
 		</TrackListWrapper>
 	);
 };
