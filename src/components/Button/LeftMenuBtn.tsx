@@ -64,10 +64,7 @@ const LeftMenuBtnWrapper = styled('div')<IProps>`
 	}}
 `;
 const LeftMenuBtn: React.FC<IProps> = props => {
-	console.log('route:', props.router!);
-
 	const handleClick = () => {
-		// Router.push(props.linkUrl!);
 		Router.pushRoute(props.linkUrl!);
 	};
 
