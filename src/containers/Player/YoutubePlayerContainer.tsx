@@ -14,10 +14,10 @@ interface IProps {
 class YoutubePlayerContainer extends React.Component<IProps> {
 	// 플레이어 ready 시에 스토어에 플레이어객체 저장
 	public handleReady = e => {
-		const { apiModel, playerModel } = this.props.store!;
+		const { playerModel } = this.props.store!;
 
-		if (apiModel.apiItems.length > 0) {
-			const { videoId, title } = apiModel.apiItems[0];
+		if (playerModel) {
+			const { videoId, title } = playerModel;
 
 			// 디폴트 videoId 세팅
 			playerModel.setPlayer({
