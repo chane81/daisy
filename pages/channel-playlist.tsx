@@ -20,7 +20,7 @@ class ChannelPlaylist extends Component<IProps> {
 		// 해당 채널의 플레이 리스트 불러오기
 		const channelId = props.router.query.channelId;
 		console.log('ff:', channelId);
-		this.props.store!.apiModel.getChannelPlaylist(channelId, 10);
+		// this.props.store!.apiModel.getChannelPlaylist(channelId, 10);
 	}
 
 	public handleThumbnailClick = (

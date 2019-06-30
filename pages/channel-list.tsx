@@ -36,6 +36,7 @@ class ChannelList extends Component<IProps> {
 		return (
 			<ChannelListSection
 				handleThumbnailClick={this.handleThumbnailClick}
+				apiChannelItems={this.props.store!.apiModel.channelList}
 			/>
 		);
 	}
