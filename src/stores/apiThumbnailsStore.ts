@@ -19,14 +19,7 @@ const model = types.model('apiThumbnailsModel', {
 });
 
 /** 초기화 값 */
-const defaultValue = {
-	identifier: 'apiThumbnailsModel',
-	default: undefined,
-	medium: undefined,
-	high: undefined,
-	standard: undefined,
-	maxres: undefined
-};
+const defaultValue = {};
 
 const create = model.create(defaultValue);
 
