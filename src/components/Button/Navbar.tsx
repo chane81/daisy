@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Link from 'next/link';
+import { Link } from '../../library/routerHelper';
 
 /**
  * 설명:						네비바 버튼
@@ -85,7 +85,7 @@ const Navbar: React.FC<IProps> = props => {
 				<div />
 			</div>
 			<div className='nav-text'>
-				<Link href='/'>
+				<Link route='/'>
 					<span>{props.btnTextName}</span>
 				</Link>
 			</div>
