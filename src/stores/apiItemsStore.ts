@@ -19,17 +19,7 @@ const model = types.model('apiItemsModel', {
 
 /** 초기화 값 */
 const defaultValue = {
-	identifier: 'apiItemsModel',
-	id: '',
-	publishedAt: '',
-	channelId: '',
-	title: '',
-	description: '',
-	thumbnails: apiThumbnailStore.defaultValue,
-	channelTitle: '',
-	playlistId: '',
-	position: 0,
-	videoId: ''
+	thumbnails: apiThumbnailStore.defaultValue
 };
 
 const create = model.create(defaultValue);
