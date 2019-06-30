@@ -10,6 +10,7 @@ const model = types
 		leftMenuVisible: types.boolean
 	})
 	.actions(self => ({
+		/** 레프트메뉴 visible 정보 토글 set */
 		setLeftMenuToggle() {
 			self.leftMenuVisible = !self.leftMenuVisible;
 		}
