@@ -7,7 +7,7 @@ const nextRoutes = require('next-routes');
  * @type {Registry}
  */
 (module.exports = nextRoutes())
-.add({name: 'root', page: '/popular-tracks', pattern: '/'})
+.add({name: '/', page: '/popular-tracks', pattern: '/'})
 .add('popular-tracks', '/popular-tracks')
 .add('channel-list', '/channel-list')
 .add('channel-playlist','/channel-playlist/:channelId');
