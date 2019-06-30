@@ -40,6 +40,34 @@ export const getChannelPlaylist = async (
 	return result;
 };
 
+/** 유튜브 API - 채널의 플레이리스트 제외한 기본정보 가져오기 API  */
+export const getChannelSimpleInfo = async (channelId: string) => {
+	const url = `${baseUrl}/channels`;
+
+	const {
+		data: { items }
+	} = await axios.get(url, {
+		params: {
+			key: apiKey,
+			id: channelId,
+			part: 'snippet,brandingSettings,contentDetails,statistics'
+		}
+	});
+
+	const item = items[0];
+
+	const result = {
+		id: item.id,
+		title: _.get(item, 'snippet.title'),
+		description: _.get(item, 'snippet.description'),
+		thumbnails: _.get(item, 'snippet.thumbnails'),
+		viewCount: _.get(item, 'statistics.viewCount'),
+		subscriberCount: _.get(item, 'statistics.subscriberCount')
+	};
+
+	return result;
+};
+
 /**
  * 유튜브 API - 재생목록 가져오기 API 호출
  * @param playlistId 플레이리스트ID
