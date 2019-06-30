@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { device } from '../../library/styleHelper';
 import Master from '../Layout/Master';
 import { observer } from 'mobx-react';
+import TrackList from '../../components/TrackList';
+import { IApiItemsModelType } from '../../stores/storeTypes';
 import TrackListContainer from '../../containers/TrackList/TrackListContainer';
 
 /**
@@ -11,6 +13,12 @@ import TrackListContainer from '../../containers/TrackList/TrackListContainer';
  */
 interface IProps {
 	className?: string;
+	apiItems?: IApiItemsModelType[];
+	handleThumbnailClick?: (
+		videoId: string,
+		title: string,
+		channelId: string
+	) => void;
 }
 
 const PopularTrackWrapper = styled('div')<IProps>``;
@@ -19,8 +27,13 @@ const PopularTrackSection: React.FC<IProps> = props => {
 	return (
 		<Master>
 			<PopularTrackWrapper {...props}>
-				<TrackListContainer></TrackListContainer>
+				<TrackList
+					className='track-list'
+					apiItems={props.apiItems}
+					handleThumbnailClick={props.handleThumbnailClick}
+				></TrackList>
 			</PopularTrackWrapper>
+			;
 		</Master>
 	);
 };
