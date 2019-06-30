@@ -1,6 +1,5 @@
 import React from 'react';
-import PopularTracks from './popular-tracks';
 
-const Index: React.FC = () => <PopularTracks />;
+const Index: React.FC = () => <div />;
 
 export default Index;
