@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import ThumbnailCard from './ThumbnailCard';
-import { IApiItemsModelType } from '../../stores/storeTypes';
+import {
+	IApiItemsModelType,
+	IApiChannelModelType
+} from '../../stores/storeTypes';
 import { device } from '../../library/styleHelper';
 
 /**
@@ -13,7 +16,7 @@ import { device } from '../../library/styleHelper';
  */
 interface IProps {
 	className?: string;
-	apiItems?: IApiItemsModelType[];
+	apiItems?: IApiItemsModelType[] | IApiChannelModelType[];
 	handleThumbnailClick?: (
 		videoId: string,
 		title: string,
@@ -55,9 +58,12 @@ const ThumbnailListCardWrapper = styled('div')<IProps>`
 `;
 
 const ThumbnailListCard: React.FC<IProps> = props => {
+	// 썸네일로 표시할수 있는 IApiItemsModelType 타입으로 convert
+	const listItems = props.apiItems! as IApiItemsModelType[];
+
 	return (
 		<ThumbnailListCardWrapper className={props.className}>
-			{props.apiItems!.map(data => (
+			{listItems.map(data => (
 				<ThumbnailCard
 					key={data.id}
 					className={'thumbnail-card'}
