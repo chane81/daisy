@@ -1,6 +1,6 @@
 import { inject, observer } from 'mobx-react';
 import { Component } from 'react';
-import Master from '../src/components/Common/Master';
+import Master from '../src/layout/Common/MasterLayout';
 
 interface IProps {
 	store?: any;

@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { IStore } from '../src/stores/storeTypes';
-// import PopularTrackSection from '../src/components/PagesSection/PopularTrackSection';
 import PopularTracksLayout from '../src/layout/pages/PopularTracksLayout';
 import _ from 'lodash';
 

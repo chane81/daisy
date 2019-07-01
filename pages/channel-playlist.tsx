@@ -1,8 +1,6 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { IStore } from '../src/stores/storeTypes';
-// import TrackListContainer from '../src/containers/TrackList/TrackListContainer';
-// import ChannelPlaylistSection from '../src/components/PagesSection/ChannelPlaylistSection';
 import ChannelPlaylistLayout from '../src/layout/pages/ChannelPlaylistLayout';
 import { Router, withRouter } from '../src/library/routerHelper';
 import apiChannelStore from '../src/stores/apiChannelStore';

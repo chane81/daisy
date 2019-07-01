@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { IStore } from '../src/stores/storeTypes';
-// import ChannelListSection from '../src/components/PagesSection/ChannelListSection';
 import ChannelListLayout from '../src/layout/pages/ChannelListLayout';
 import { Router, withRouter } from '../src/library/routerHelper';
 
