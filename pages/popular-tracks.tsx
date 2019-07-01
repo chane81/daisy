@@ -28,7 +28,7 @@ class PopularTracks extends Component<IProps> {
 		// 인기트랙 불러오기
 		apiModel.getPlayListItems(
 			process.env.YOUTUBE_API_POPULAR_TRACK_PLAYLIST_ID!,
-			2
+			20
 		);
 	}
 
