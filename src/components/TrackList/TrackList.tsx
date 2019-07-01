@@ -44,6 +44,7 @@ const TrackListWrapper = styled('div')<IProps>`
 
 	@media ${device.mobile} {
 		flex-flow: column nowrap;
+
 		.youtube-player {
 			padding-right: 0;
 		}
@@ -54,6 +55,7 @@ const TrackList: React.FC<IProps> = props => {
 	return (
 		<TrackListWrapper {...props}>
 			<YoutubePlayer
+				className='youtube-player'
 				playerOptions={props.playerOptions}
 				handleReady={props.handlePlayerReady}
 				leftMenuVisible={props.leftMenuVisible}
