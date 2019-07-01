@@ -33,7 +33,42 @@
 
 # 유튜브 미디어 서비스의 단위 큰것 -> 작은것
 
-- 채널 > 플레이리스트 > 트렉리스트(Video List) > Video
+- ## 채널 > 플레이리스트 > 트렉리스트(Video List) > Video
+
+# 컴포넌트들의 구성
+
+- ## `components`(프리젠테이셔널 컴포넌트)
+  - 프리젠테이셔널 컴포넌트들 모음
+  - stateless 하다
+  - 스타일(css, sass...) 에 대한 구성이 들어감
+  - 다른 프리젠테이셔널 컴포넌트만 포함한다.
+
+- ## `containers`(비즈니스 컴포넌트)
+  - 프리젠테이셔널 컴포넌트에 대한 비즈니스 로직(mobx, redux...) 구성 컴포넌트
+  - statefull 하다
+
+- ## `layout`(프리젠테이셔널 + 비즈니스 컴포넌트 composed)
+  - 컨테이너 컴포넌트, 프리젠테이셔널 컴포넌트를 가지고 구성 및 스타일링을 한다.
+  - 최종 pages 컴포넌트에 대한 레이아웃 컴포넌트가 여기 포함된다(프리젠테이셔널한 컴포넌트임)
+  - stateless 하다
+  
+- ## `pages`(최종 페이지)
+  - 라우팅될 때 이 페이지를 읽게된다.
+  - 라우팅명과 페이지명이 동일해야한다는 next.js 규칙이 있다.
+  - statefull 하다
+  - pages 의 프리젠테이셔널 컴포넌트는 layout 컴포넌트이다.
+
+- ## `pages > layout > containers > components`
+
+- `조합 예)`
+  > A 컴포넌트(Presentation) + B 컴포넌트(Presentation) => `C 컴포넌트(Presentation)` 
+  
+  > C 컴포넌트(Presentation) => `C-1 컴포넌트(Container)`
+
+  > C-1 컴포넌트(Container) + D 컴포넌트(Presentation) => `E 컴포넌트(Layout)`
+  
+  > E 컴포넌트(Layout) => `F 컴포넌트(Page)`
+
 
 # `Next.js 에서의 _document 와 _app 의 차이` 중요하니 알아두자
 
@@ -432,6 +467,34 @@
       	);
       }
       ```
+- ## css-loader 이슈
+  - 슬라이더효과를 쓰기 위해 아래와 같이 css 를 .scss 파일에 import 함
+    ```css
+    @import '~slick-carousel/slick/slick.css';
+    @import '~slick-carousel/slick/slick-theme.css';
+    ```
+  - 아래와 같이 오류가 나온다.
+    > ![](/static/images/cssloader_error.png)
+  - 해당 이슈로 인해 `next.config.js` 에서 css-loader 의 옵션부분을 수정
+  - css-loader 의 url 옵션을 false 로 변경
+    ```js
+    // 기존
+    module.exports = withPlugins([
+      [withSass]
+    ])
+
+    // 변경 후
+    module.exports = withPlugins([
+      [withSass, {
+        cssLoaderOptions: {
+          url: false
+        }
+      }],
+    ])
+    ```
+  - 해당 이슈의 참고 url
+    - 아직 명확한 이유는 찾지 못하고 해결만 한 상태다.
+    > https://spectrum.chat/next-js/general/ignoring-folders-files-specifically-fonts~4f68cfd5-d576-46b8-adc8-86e9d7ea0b1f
 
 - ## 웹펙에서 소스난독화/압축화를 할 때 기존에는 uglify 플러그인을 썼지만 아래 그림과 같이 deprecated 가 되었다.
 
