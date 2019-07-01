@@ -14,7 +14,9 @@ const model = types.model('apiItemsModel', {
 	channelTitle: types.optional(types.string, ''),
 	playlistId: types.optional(types.string, ''),
 	position: types.optional(types.number, 0),
-	videoId: types.optional(types.string, '')
+	videoId: types.optional(types.string, ''),
+	viewCount: types.optional(types.number, 0),
+	subscriberCount: types.optional(types.number, 0)
 });
 
 /** 초기화 값 */
