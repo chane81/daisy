@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { IStore } from '../src/stores/storeTypes';
-import ChannelListSection from '../src/components/PagesSection/ChannelListSection';
+// import ChannelListSection from '../src/components/PagesSection/ChannelListSection';
+import ChannelListLayout from '../src/layout/pages/ChannelListLayout';
 import { Router, withRouter } from '../src/library/routerHelper';
 
 /**
@@ -26,15 +27,12 @@ class ChannelList extends Component<IProps> {
 		title: string,
 		channelId: string
 	) => {
-		const { playerModel } = this.props.store!;
-
 		Router.pushRoute('channel-playlist', { channelId });
-		// Router.push('/popular-tracks');
 	};
 
 	public render() {
 		return (
-			<ChannelListSection
+			<ChannelListLayout
 				handleThumbnailClick={this.handleThumbnailClick}
 				apiChannelItems={this.props.store!.apiModel.channelList}
 			/>
