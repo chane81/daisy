@@ -16,7 +16,7 @@ import { device } from '../../library/styleHelper';
  */
 interface IProps {
 	className?: string;
-	apiItems?: IApiItemsModelType[] | IApiChannelModelType[];
+	apiItems?: IApiItemsModelType[];
 	handleThumbnailClick?: (
 		videoId: string,
 		title: string,
@@ -58,14 +58,11 @@ const ThumbnailListCardWrapper = styled('div')<IProps>`
 `;
 
 const ThumbnailListCard: React.FC<IProps> = props => {
-	// 썸네일로 표시할수 있는 IApiItemsModelType 타입으로 convert
-	const listItems = props.apiItems! as IApiItemsModelType[];
-
 	return (
 		<ThumbnailListCardWrapper className={props.className}>
-			{listItems.map(data => (
+			{props.apiItems!.map((data, index) => (
 				<ThumbnailCard
-					key={data.id}
+					key={index}
 					className={'thumbnail-card'}
 					videoId={data.videoId}
 					channelId={data.channelId}
