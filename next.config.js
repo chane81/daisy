@@ -12,8 +12,16 @@ const withPlugins = require('next-compose-plugins');
 module.exports = withPlugins([
   [withSourceMaps],
   [withTypescript],
-  [withSass],
-  [withCSS]
+  [withSass, {
+    cssLoaderOptions: {
+      url: false
+    }
+  }],
+  [withCSS, {
+    cssLoaderOptions: {
+      url: false
+    }
+  }]
 ], {
   // 빌드 디렉토리 설정
   distDir: 'build',
