@@ -38,8 +38,6 @@ const ThumbnailCardWrapper = styled('div')<IProps>`
 	flex: 1 1 ${(props: IProps) => props.flexBasis};
 
 	@media ${device.desktop + ',' + device.tablet} {
-		/* flex: 1 1 13rem; */
-		/* margin: 0 0 0.5rem 0.5rem; */
 		margin: 0 0.25rem 0.5rem 0.25rem;
 		img {
 			width: 100%;
