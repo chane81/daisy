@@ -2,7 +2,8 @@ import { flow, Instance, types, applySnapshot } from 'mobx-state-tree';
 import {
 	getPlayListItems,
 	getSearch,
-	getChannelPlaylist
+	getChannelPlaylist,
+	getChannelSimpleInfo
 } from '../apis/youtubeApi';
 import apiItemsStore from './apiItemsStore';
 import apiTrackListStore from './apiTrackListStore';
@@ -15,34 +16,49 @@ const model = types
 		/** 스토어 아이덴티티 */
 		identifier: types.optional(types.identifier, 'apiModel'),
 
-		/** 인기트렉 리스트 */
-		popularTrackList: apiTrackListStore.model,
+		/** 트렉 리스트 */
+		trackList: apiTrackListStore.model,
 
 		/** 채널 정보 */
 		channelInfo: apiChannelStore.model,
 
 		/** 채널 리스트 */
-		channelList: types.array(apiChannelStore.model),
+		channelList: types.array(apiItemsStore.model),
 
 		/** api call 상태: pending, success, fail */
 		status: types.optional(statusStore.model, statusStore.defaultValue)
 	})
 	.actions(self => ({
-		// /**
-		//  * 채널의 플레이리스트들 가져오기
-		//  * channelId: 채널ID
-		//  * maxResults: 최대 개수
-		//  */
+		/**
+		 * 채널의 플레이리스트들 가져오기
+		 * channelId: 채널ID
+		 * maxResults: 최대 개수
+		 */
 		// getChannelPlaylist: flow(function*(
 		// 	channelId: string,
 		// 	maxResults: number
 		// ) {
-		// 	// 명시적 초기화
-		// 	applySnapshot(self, defaultValue);
-
 		// 	// data get
 		// 	self.apiItems = yield getChannelPlaylist(channelId, maxResults);
 		// }),
+
+		getChannelInfo: flow(function*(channelId: string, maxResults: number) {
+			// channel simple data get
+			const channelSimpleData = yield getChannelSimpleInfo(channelId);
+
+			// playList data get
+			const channelPlayList = yield getChannelPlaylist(
+				channelId,
+				maxResults
+			);
+
+			const result = {
+				...channelSimpleData,
+				playList: { ...channelPlayList }
+			};
+
+			self.channelInfo = result;
+		}),
 		/**
 		 * 재생목록가져오기
 		 * playlistId: 가져올 플레이리스트 ID
@@ -58,7 +74,7 @@ const model = types
 
 			try {
 				// data get
-				self.popularTrackList.tracks = yield getPlayListItems(
+				self.trackList.tracks = yield getPlayListItems(
 					playlistId,
 					maxResults
 				);
@@ -81,7 +97,7 @@ const model = types
 
 			try {
 				// data get
-				self.popularTrackList.tracks = yield getSearch({
+				self.trackList.tracks = yield getSearch({
 					searchText,
 					maxResults
 				}).catch(err => {
@@ -121,7 +137,7 @@ const model = types
 	}));
 
 const defaultValue = {
-	popularTrackList: apiTrackListStore.defaultValue,
+	trackList: apiTrackListStore.defaultValue,
 	channelInfo: apiChannelStore.defaultValue,
 	channelList: [],
 	status: statusStore.defaultValue
