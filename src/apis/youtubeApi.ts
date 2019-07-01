@@ -57,12 +57,15 @@ export const getChannelSimpleInfo = async (channelId: string) => {
 	const item = items[0];
 
 	const result = {
-		id: item.id,
+		channelId: item.id,
 		title: _.get(item, 'snippet.title'),
 		description: _.get(item, 'snippet.description'),
 		thumbnails: _.get(item, 'snippet.thumbnails'),
-		viewCount: _.get(item, 'statistics.viewCount'),
-		subscriberCount: _.get(item, 'statistics.subscriberCount')
+		viewCount: parseInt(_.get(item, 'statistics.viewCount'), 10),
+		subscriberCount: parseInt(
+			_.get(item, 'statistics.subscriberCount'),
+			10
+		)
 	};
 
 	return result;
@@ -153,8 +156,8 @@ export const getSearch = async ({
 		case 'video': {
 			result = _.map(items, data => ({
 				id: _.get(data, 'id.videoId'),
-				..._.pick(data, ['snippet']).snippet,
-				videoId: _.get(data, 'id.videoId')
+				videoId: _.get(data, 'id.videoId'),
+				..._.pick(data, ['snippet']).snippet
 			}));
 
 			break;
@@ -162,6 +165,7 @@ export const getSearch = async ({
 		case 'channel': {
 			result = _.map(items, data => ({
 				id: _.get(data, 'snippet.channelId'),
+				channelId: _.get(data, 'snippet.channelId'),
 				..._.pick(data, ['snippet']).snippet
 			}));
 
