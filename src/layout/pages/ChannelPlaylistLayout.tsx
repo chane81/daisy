@@ -5,6 +5,7 @@ import MasterLayout from '../Common/MasterLayout';
 import { observer } from 'mobx-react';
 import ThumbnailListCardContainer from '../../containers/Cards/ThumbnailListCardContainer';
 import PlayItemListCard from '../../components/Cards/PlayItemListCard';
+import { IApiItemsModelType } from '../../stores/storeTypes';
 
 /**
  * 설명:									채널리스트 page 의 presentation 컴포넌트
@@ -12,6 +13,7 @@ import PlayItemListCard from '../../components/Cards/PlayItemListCard';
  */
 interface IProps {
 	className?: string;
+	apiItems?: IApiItemsModelType[];
 	handleThumbnailClick: (
 		videoId: string,
 		title: string,
@@ -68,7 +70,7 @@ const ChannelPlaylistLayout: React.FC<IProps> = props => {
 						<div>구독자 1,5000,515명</div>
 					</div>
 				</div>
-				<PlayItemListCard></PlayItemListCard>
+				<PlayItemListCard apiItems={props.apiItems}></PlayItemListCard>
 			</ChannelPlaylistLayoutWrapper>
 		</MasterLayout>
 	);

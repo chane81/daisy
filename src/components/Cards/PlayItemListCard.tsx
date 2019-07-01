@@ -4,6 +4,7 @@ import ThumbnailCard from './ThumbnailCard';
 import Slider from 'react-slick';
 import { device } from '../../library/styleHelper';
 import '../../styles/slider.scss';
+import { IApiItemsModelType } from '../../stores/storeTypes';
 
 /**
  * 설명:						썸네일 카드
@@ -11,7 +12,7 @@ import '../../styles/slider.scss';
  */
 interface IProps {
 	className?: string;
-	leftmenu;
+	apiItems?: IApiItemsModelType[];
 }
 
 const PlayItemListCardWrapper = styled('div')<IProps>`
