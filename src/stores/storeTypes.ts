@@ -3,7 +3,7 @@ import { IApiModelType } from './apiStore';
 import { IApiItemsModelType } from './apiItemsStore';
 import { IApiThumbnailsModelType } from './apiThumbnailsStore';
 import { IPlayerModelType } from './playerStore';
-import { IApiChannelModelType } from './apiChannelStore';
+import { IApiChannelInfoModelType } from './apiChanneInfoStore';
 import { IApiTrackListModelType } from './apiTrackListStore';
 import { IStatuslModelType } from './statusStore';
 import { IUiModelType } from './uiStore';
@@ -15,7 +15,7 @@ export {
 	IApiItemsModelType,
 	IApiThumbnailsModelType,
 	IPlayerModelType,
-	IApiChannelModelType,
+	IApiChannelInfoModelType,
 	IApiTrackListModelType,
 	IStatuslModelType,
 	IStore
