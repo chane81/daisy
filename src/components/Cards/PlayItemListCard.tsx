@@ -81,7 +81,7 @@ const PlayItemListCard: React.FC<IProps> = props => {
 				</div>
 			))}
 
-			<div>김원의 [사건팩트 & 사건파일]</div>
+			{/* <div>김원의 [사건팩트 & 사건파일]</div>
 			<div>
 				★신비한 이야기, 수수께끼 들어 보실래요? ★김원의 "일요 Mystery" /
 				"오컬트 Story" 많은 시청 해주세요.
@@ -125,7 +125,7 @@ const PlayItemListCard: React.FC<IProps> = props => {
 						className='thumbnail-card'
 					></ThumbnailCard>
 				</Slider>
-			</div>
+			</div> */}
 		</PlayItemListCardWrapper>
 	);
 };
