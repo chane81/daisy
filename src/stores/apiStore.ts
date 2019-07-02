@@ -11,6 +11,8 @@ import apiChannelInfoStore from './apiChanneInfoStore';
 import statusStore from './statusStore';
 import _ from 'lodash';
 import MyApp from '../../pages/_app';
+import { IApiTrackListModelType } from './apiTrackListStore';
+import { IApiChannelInfoModelType } from './apiChanneInfoStore';
 
 const model = types
 	.model('apiModel', {
@@ -21,7 +23,10 @@ const model = types
 		trackList: apiTrackListStore.model,
 
 		/** 채널 정보 */
-		channelInfo: apiChannelInfoStore.model,
+		channelInfo: types.optional(
+			apiChannelInfoStore.model,
+			apiChannelInfoStore.defaultValue
+		),
 
 		/** 채널 리스트 */
 		channelList: types.array(apiItemsStore.model),
@@ -36,19 +41,34 @@ const model = types
 		 * maxResults: 플레이리스트 최대 개수
 		 */
 		getChannelInfo: flow(function*(channelId: string, maxResults: number) {
-			// 채널 기본정보 가져오기 - 타이틀, 구독자수 등
-			const channelSimpleData = yield getChannelBaseInfo(channelId);
+			self.status.setStatus('pending');
 
-			// 채널 플레이리스트 가져오기 - 플레이리스트ID 포함, 여러개의 트랙정보
-			const channelPlayList = yield getChannelPlaylist(
-				channelId,
-				maxResults
-			);
+			try {
+				// Promose All
+				const promiseResult = yield Promise.all([
+					// 채널 기본정보 가져오기 - 타이틀, 구독자수 등
+					getChannelBaseInfo(channelId),
 
-			self.channelInfo.baseInfo = channelSimpleData;
-			self.channelInfo.playList = channelPlayList;
+					// 채널 플레이리스트 가져오기 - 플레이리스트ID 포함, 여러개의 트랙정보
+					getChannelPlaylist(channelId, maxResults)
+				]);
 
-			//console.log('getChannelInfo:', self.channelInfo);
+				// 상태값 주입
+				self.channelInfo = {
+					identifier: 'apiChannelInfoModel',
+					baseInfo: promiseResult[0],
+					playList: promiseResult[1]
+				};
+
+				self.status.setStatus('success');
+			} catch (err) {
+				self.status.setError(err);
+			}
+
+			// self.channelInfo.baseInfo = channelSimpleData;
+			// self.channelInfo.playList = channelPlayList;
+
+			// console.log('getChannelInfo:', self.channelInfo);
 		}),
 		/**
 		 * 재생목록가져오기
