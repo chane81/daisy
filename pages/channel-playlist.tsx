@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { IStore } from '../src/stores/storeTypes';
 import ChannelPlaylistLayout from '../src/layout/pages/ChannelPlaylistLayout';
 import { Router, withRouter } from '../src/library/routerHelper';
-import apiChannelStore from '../src/stores/apiChannelStore';
+import apiChannelStore from '../src/stores/apiChanneInfoStore';
 
 /**
  * 설명:	채널리스트 page
@@ -40,10 +40,13 @@ class ChannelPlaylist extends Component<IProps> {
 	};
 
 	public render() {
+		const { channelInfo } = this.props.store!.apiModel;
+
 		return (
 			<div>
 				<ChannelPlaylistLayout
 					handleThumbnailClick={this.handleThumbnailClick}
+					apiChannelInfo={channelInfo}
 				/>
 			</div>
 		);

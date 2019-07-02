@@ -5,7 +5,7 @@ import MasterLayout from '../Common/MasterLayout';
 import { observer } from 'mobx-react';
 import ThumbnailListCardContainer from '../../containers/Cards/ThumbnailListCardContainer';
 import PlayItemListCard from '../../components/Cards/PlayItemListCard';
-import { IApiItemsModelType } from '../../stores/storeTypes';
+import { IApiChannelInfoModelType } from '../../stores/storeTypes';
 
 /**
  * 설명:									채널리스트 page 의 presentation 컴포넌트
@@ -13,7 +13,7 @@ import { IApiItemsModelType } from '../../stores/storeTypes';
  */
 interface IProps {
 	className?: string;
-	apiItems?: IApiItemsModelType[];
+	apiChannelInfo?: IApiChannelInfoModelType;
 	handleThumbnailClick: (
 		videoId: string,
 		title: string,
@@ -60,17 +60,19 @@ const ChannelPlaylistLayoutWrapper = styled('div')`
 `;
 
 const ChannelPlaylistLayout: React.FC<IProps> = props => {
+	const { baseInfo, playList } = props.apiChannelInfo!;
+
 	return (
 		<MasterLayout>
 			<ChannelPlaylistLayoutWrapper>
 				<div className='channel-header-info'>
 					<div className='channel-image'></div>
 					<div className='channel-desc'>
-						<div>K-Pop 주제</div>
-						<div>구독자 1,5000,515명</div>
+						<div>{baseInfo.title}</div>
+						<div>구독자 {baseInfo.subscriberCount}명</div>
 					</div>
 				</div>
-				<PlayItemListCard apiItems={props.apiItems}></PlayItemListCard>
+				<PlayItemListCard apiItems={playList}></PlayItemListCard>
 			</ChannelPlaylistLayoutWrapper>
 		</MasterLayout>
 	);

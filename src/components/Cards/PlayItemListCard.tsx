@@ -4,7 +4,10 @@ import ThumbnailCard from './ThumbnailCard';
 import Slider from 'react-slick';
 import { device } from '../../library/styleHelper';
 import '../../styles/slider.scss';
-import { IApiItemsModelType } from '../../stores/storeTypes';
+import {
+	IApiItemsModelType,
+	IApiTrackListModelType
+} from '../../stores/storeTypes';
 
 /**
  * 설명:						썸네일 카드
@@ -12,7 +15,7 @@ import { IApiItemsModelType } from '../../stores/storeTypes';
  */
 interface IProps {
 	className?: string;
-	apiItems?: IApiItemsModelType[];
+	apiItems?: IApiTrackListModelType[];
 }
 
 const PlayItemListCardWrapper = styled('div')<IProps>`
@@ -38,7 +41,7 @@ const PlayItemListCardWrapper = styled('div')<IProps>`
 
 const PlayItemListCard: React.FC<IProps> = props => {
 	const sliderSettings = {
-		dots: true,
+		dots: false,
 		arrows: false,
 		infinite: false,
 		slidesToShow: 3,
@@ -59,6 +62,25 @@ const PlayItemListCard: React.FC<IProps> = props => {
 
 	return (
 		<PlayItemListCardWrapper {...props}>
+			{props.apiItems!.map(data => (
+				<div>
+					<div>{data.title}</div>
+					<div className='slider'>
+						<Slider {...sliderSettings}>
+							{data.tracks.map(track => (
+								<ThumbnailCard
+									imageUrl={track.thumbnails!.medium!.url}
+									width='11rem'
+									height='13.5rem'
+									title={track.title}
+									className='thumbnail-card'
+								></ThumbnailCard>
+							))}
+						</Slider>
+					</div>
+				</div>
+			))}
+
 			<div>김원의 [사건팩트 & 사건파일]</div>
 			<div>
 				★신비한 이야기, 수수께끼 들어 보실래요? ★김원의 "일요 Mystery" /
