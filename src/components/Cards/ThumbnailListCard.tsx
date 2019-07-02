@@ -2,10 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import ThumbnailCard from './ThumbnailCard';
-import {
-	IApiItemsModelType,
-	IApiChannelModelType
-} from '../../stores/storeTypes';
+import { IApiItemsModelType } from '../../stores/storeTypes';
 import { device } from '../../library/styleHelper';
 
 /**
