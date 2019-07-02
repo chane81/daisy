@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { device } from '../../library/styleHelper';
 import MasterLayout from '../Common/MasterLayout';
 import { observer } from 'mobx-react';
@@ -14,6 +14,7 @@ import commonHelper from '../../library/commonHelper';
 interface IProps {
 	className?: string;
 	apiChannelInfo?: IApiChannelInfoModelType;
+	leftMenuVisible: boolean;
 	handleThumbnailClick: (
 		videoId: string,
 		title: string,
@@ -51,10 +52,17 @@ const ChannelPlaylistLayoutWrapper = styled('div')`
 			flex-flow: column;
 			justify-content: center;
 			align-items: center;
-			background-image: url('https://yt3.ggpht.com/a/AGF-l7-NQdbfxI9mOxPjpTV5NZ34oHC56_TgbLIHAA=s240-mo-c-c0xffffffff-rj-k-no');
 			background-size: 5rem;
 			box-shadow: 0 10px 10px rgba(0, 0, 0, 0.14),
 				0 10px 10px rgba(0, 0, 0, 0.14);
+
+			${(props: IProps) => {
+				const url = props.apiChannelInfo!.baseInfo.thumbnails!.medium!.url;
+
+				return css`
+					background-image: url(${url});
+				`;
+			}};
 		}
 	}
 `;
@@ -64,7 +72,7 @@ const ChannelPlaylistLayout: React.FC<IProps> = props => {
 
 	return (
 		<MasterLayout>
-			<ChannelPlaylistLayoutWrapper>
+			<ChannelPlaylistLayoutWrapper {...props}>
 				<div className='channel-header-info'>
 					<div className='channel-image'></div>
 					<div className='channel-desc'>
@@ -74,7 +82,10 @@ const ChannelPlaylistLayout: React.FC<IProps> = props => {
 						</div>
 					</div>
 				</div>
-				<PlayItemListCard apiItems={playList}></PlayItemListCard>
+				<PlayItemListCard
+					apiItems={playList}
+					leftMenuVisible={props.leftMenuVisible}
+				></PlayItemListCard>
 			</ChannelPlaylistLayoutWrapper>
 		</MasterLayout>
 	);
