@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { device } from '../../library/styleHelper';
 import MasterLayout from '../Common/MasterLayout';
 import { observer } from 'mobx-react';
-import ThumbnailListCardContainer from '../../containers/Cards/ThumbnailListCardContainer';
 import PlayItemListCard from '../../components/Cards/PlayItemListCard';
 import { IApiChannelInfoModelType } from '../../stores/storeTypes';
+import commonHelper from '../../library/commonHelper';
 
 /**
  * 설명:									채널리스트 page 의 presentation 컴포넌트
@@ -69,7 +69,9 @@ const ChannelPlaylistLayout: React.FC<IProps> = props => {
 					<div className='channel-image'></div>
 					<div className='channel-desc'>
 						<div>{baseInfo.title}</div>
-						<div>구독자 {baseInfo.subscriberCount}명</div>
+						<div>
+							구독자 {commonHelper.numFormat(baseInfo.subscriberCount)}명
+						</div>
 					</div>
 				</div>
 				<PlayItemListCard apiItems={playList}></PlayItemListCard>
