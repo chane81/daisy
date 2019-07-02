@@ -4,6 +4,7 @@ import { IStore } from '../src/stores/storeTypes';
 import ChannelPlaylistLayout from '../src/layout/pages/ChannelPlaylistLayout';
 import { Router, withRouter } from '../src/library/routerHelper';
 import apiChannelStore from '../src/stores/apiChanneInfoStore';
+import apiItemsStore from '../src/stores/apiItemsStore';
 
 /**
  * 설명:	채널리스트 page
@@ -27,10 +28,9 @@ class ChannelPlaylist extends Component<IProps> {
 
 		// 해당 채널의 플레이 리스트 불러오기
 		await apiModel.getChannelInfo(channelId, 5);
-
-		console.log('channelInfo:', apiModel.channelInfo);
 	}
 
+	// 썸네일 클릭시
 	public handleThumbnailClick = (
 		videoId: string,
 		title: string,
@@ -40,19 +40,24 @@ class ChannelPlaylist extends Component<IProps> {
 	};
 
 	public render() {
-		const { channelInfo } = this.props.store!.apiModel;
+		const { apiModel, uiModel } = this.props.store!;
+
+		if (apiModel.status.now === 'pending') {
+			return <div>pending...</div>;
+		}
 
 		return (
 			<div>
 				<ChannelPlaylistLayout
 					handleThumbnailClick={this.handleThumbnailClick}
-					apiChannelInfo={channelInfo}
+					apiChannelInfo={apiModel.channelInfo}
+					leftMenuVisible={uiModel.leftMenuVisible}
 				/>
 			</div>
 		);
 	}
 }
 
-export default inject(({ store }) => ({ store }))(
-	observer(withRouter(ChannelPlaylist))
+export default withRouter(
+	inject(({ store }) => ({ store }))(observer(ChannelPlaylist))
 );
