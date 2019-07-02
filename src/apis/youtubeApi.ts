@@ -32,16 +32,20 @@ export const getChannelPlaylist = async (
 		}
 	});
 
-	const result = _.map(items, data => ({
-		..._.pick(data, ['id']),
-		..._.pick(data, ['snippet']).snippet
-	}));
+	const result = await Promise.all(
+		_.map(items, async data => ({
+			id: _.get(data, ['id']),
+			..._.pick(data, ['snippet']).snippet,
+			tracks: await getPlayListItems(_.get(data, ['id']), 6)
+		}))
+	);
 
+	console.log('res', result);
 	return result;
 };
 
 /** 유튜브 API - 채널의 플레이리스트 제외한 기본정보 가져오기 API  */
-export const getChannelSimpleInfo = async (channelId: string) => {
+export const getChannelBaseInfo = async (channelId: string) => {
 	const url = `${baseUrl}/channels`;
 
 	const {

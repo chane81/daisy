@@ -3,13 +3,14 @@ import {
 	getPlayListItems,
 	getSearch,
 	getChannelPlaylist,
-	getChannelSimpleInfo
+	getChannelBaseInfo
 } from '../apis/youtubeApi';
 import apiItemsStore from './apiItemsStore';
 import apiTrackListStore from './apiTrackListStore';
-import apiChannelStore from './apiChannelStore';
+import apiChannelInfoStore from './apiChanneInfoStore';
 import statusStore from './statusStore';
 import _ from 'lodash';
+import MyApp from '../../pages/_app';
 
 const model = types
 	.model('apiModel', {
@@ -20,7 +21,7 @@ const model = types
 		trackList: apiTrackListStore.model,
 
 		/** 채널 정보 */
-		channelInfo: apiChannelStore.model,
+		channelInfo: apiChannelInfoStore.model,
 
 		/** 채널 리스트 */
 		channelList: types.array(apiItemsStore.model),
@@ -30,34 +31,24 @@ const model = types
 	})
 	.actions(self => ({
 		/**
-		 * 채널의 플레이리스트들 가져오기
+		 * 채널 정보 가져오기
 		 * channelId: 채널ID
-		 * maxResults: 최대 개수
+		 * maxResults: 플레이리스트 최대 개수
 		 */
-		// getChannelPlaylist: flow(function*(
-		// 	channelId: string,
-		// 	maxResults: number
-		// ) {
-		// 	// data get
-		// 	self.apiItems = yield getChannelPlaylist(channelId, maxResults);
-		// }),
-
 		getChannelInfo: flow(function*(channelId: string, maxResults: number) {
-			// channel simple data get
-			const channelSimpleData = yield getChannelSimpleInfo(channelId);
+			// 채널 기본정보 가져오기 - 타이틀, 구독자수 등
+			const channelSimpleData = yield getChannelBaseInfo(channelId);
 
-			// playList data get
+			// 채널 플레이리스트 가져오기 - 플레이리스트ID 포함, 여러개의 트랙정보
 			const channelPlayList = yield getChannelPlaylist(
 				channelId,
 				maxResults
 			);
 
-			const result = {
-				...channelSimpleData,
-				playList: { ...channelPlayList }
-			};
+			self.channelInfo.baseInfo = channelSimpleData;
+			self.channelInfo.playList = channelPlayList;
 
-			self.channelInfo = result;
+			//console.log('getChannelInfo:', self.channelInfo);
 		}),
 		/**
 		 * 재생목록가져오기
@@ -138,7 +129,7 @@ const model = types
 
 const defaultValue = {
 	trackList: apiTrackListStore.defaultValue,
-	channelInfo: apiChannelStore.defaultValue,
+	channelInfo: apiChannelInfoStore.defaultValue,
 	channelList: [],
 	status: statusStore.defaultValue
 };
