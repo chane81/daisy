@@ -16,10 +16,17 @@ import {
 interface IProps {
 	className?: string;
 	apiItems?: IApiTrackListModelType[];
+	leftMenuVisible?: boolean;
 }
 
 const PlayItemListCardWrapper = styled('div')<IProps>`
-	width: calc(100vw - 11.5rem);
+	width: ${(props: IProps) =>
+		props.leftMenuVisible ? 'calc(100vw - 11.5rem)' : '100vw'};
+
+	.slick-slide,
+	.thumbnail-card {
+		/* transition: all 10s ease-in-out; */
+	}
 
 	.thumbnail-card {
 		margin: 0;
@@ -62,13 +69,14 @@ const PlayItemListCard: React.FC<IProps> = props => {
 
 	return (
 		<PlayItemListCardWrapper {...props}>
-			{props.apiItems!.map(data => (
-				<div>
+			{props.apiItems!.map((data, index) => (
+				<div key={data.id}>
 					<div>{data.title}</div>
 					<div className='slider'>
 						<Slider {...sliderSettings}>
 							{data.tracks.map(track => (
 								<ThumbnailCard
+									key={track.id}
 									imageUrl={track.thumbnails!.medium!.url}
 									width='11rem'
 									height='13.5rem'
