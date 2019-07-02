@@ -496,6 +496,26 @@
     - 아직 명확한 이유는 찾지 못하고 해결만 한 상태다.
     > https://spectrum.chat/next-js/general/ignoring-folders-files-specifically-fonts~4f68cfd5-d576-46b8-adc8-86e9d7ea0b1f
 
+- ## mobx 와 withRouter 를 같이 쓸 때 상태값을 제대로 못 가져오는 이슈
+  - mobx 에서 axios 를 써서 데이터를 가져올 때 비동기에 대한 상태로 pending, success, fail 을 mobx 상태값으로 넣어주게 해놓았다.
+  - mobx 에서는 pending -> success 로 상태값 update 하는것을 확인 하였으나 정작 컴포넌트에서는 아래 `[그림]`과 같이 pending 에서 success 로 바뀐 상태값을 가져오지 않았다.
+  - 해결 방법
+    > 아래와 같이 withRouter 를 mobx관련 hoc 바깥으로 묶어서 해결
+      ```js
+      // 문제가 있던 기존코드
+      export default inject(({ store }) => ({ store }))(
+        observer(withRouter(ChannelPlaylist))
+      );
+
+      // 문제 해결된 변경된 코드      
+      export default withRouter(
+        inject(({ store }) => ({ store }))(observer(ChannelPlaylist))
+      );
+      ```
+  - `[그림]` - mobx 내부에서는 status 상태값 update 했으나 컴포넌트에서는 pending 상태에서 바뀌지 않음
+  > ![](/static/images/mobx_withRouter_issue.png)
+
+
 - ## 웹펙에서 소스난독화/압축화를 할 때 기존에는 uglify 플러그인을 썼지만 아래 그림과 같이 deprecated 가 되었다.
 
   > ![](/static/images/uglifyJsPlugin_deprecated_1.png)
