@@ -513,7 +513,7 @@
       );
       ```
   - `[그림]` - mobx 내부에서는 status 상태값 update 했으나 컴포넌트에서는 pending 상태에서 바뀌지 않음
-  > ![](/static/images/mobx_withRouter_issue.png)
+    > ![](/static/images/mobx_withRouter_issue.png)
 
 
 - ## 웹펙에서 소스난독화/압축화를 할 때 기존에는 uglify 플러그인을 썼지만 아래 그림과 같이 deprecated 가 되었다.
