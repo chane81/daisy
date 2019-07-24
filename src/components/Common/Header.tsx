@@ -27,6 +27,16 @@ const HeaderWrapper = styled.div`
 	.search-area {
 		flex: 1;
 
+		&::after {
+			background: linear-gradient(to right, #9e7cc1, #8ecdea);
+			content: '';
+			width: 100%;
+			position: absolute;
+			top: 50px;
+			height: 3px;
+			left: 0;
+		}
+
 		.search-box {
 			border: solid 1px #dee2e6;
 			border-right: none;
