@@ -36,6 +36,7 @@ const ThumbnailCardWrapper = styled('div')<IProps>`
 	width: ${(props: IProps) => props.width};
 	height: ${(props: IProps) => props.height};
 	flex: 1 1 ${(props: IProps) => props.flexBasis};
+	box-sizing: border-box;
 
 	@media ${device.desktop + ',' + device.tablet} {
 		margin: 0 0.25rem 0.5rem 0.25rem;
@@ -51,7 +52,8 @@ const ThumbnailCardWrapper = styled('div')<IProps>`
 		border-top: none;
 		border-left: none;
 		border-right: none;
-		border-bottom: 1px solid #adb5bd;
+
+		border-bottom: 0.7px solid #adb5bd;
 		margin: 0 0.5rem 0.5rem 0.5rem;
 
 		img {
@@ -60,7 +62,7 @@ const ThumbnailCardWrapper = styled('div')<IProps>`
 		}
 	}
 
-	border: 1px solid #ced4da;
+	border: 0.7px solid #ced4da;
 	cursor: pointer;
 
 	&:hover {

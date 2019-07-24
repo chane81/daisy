@@ -60,7 +60,7 @@ const YoutubePlayerWrapper = styled('div')<IProps>`
 		.youtube-title {
 			flex: 1 1 100;
 			font-size: 1.4rem;
-			border-bottom: 1px solid #adb5bd;
+			border-bottom: 0.7px solid #adb5bd;
 		}
 
 		.youtube {

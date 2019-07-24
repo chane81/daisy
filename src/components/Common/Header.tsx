@@ -22,7 +22,7 @@ const HeaderWrapper = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	height: 50px;
-	border-bottom: solid 1px #868e96;
+	border-bottom: solid 1px #e7ebf3;
 
 	.search-area {
 		flex: 1;

@@ -20,8 +20,8 @@ const LeftMenuWrapper = styled('div')<IProps>`
 	flex-direction: column;
 	align-items: flex-start;
 	box-sizing: border-box;
-	border-right: 1px solid #868e96;
-	border-bottom: 1px solid #868e96;
+	border-right: 1px solid #e7ebf3;
+	border-bottom: 1px solid #e7ebf3;
 	min-height: 50px;
 	overflow-y: auto;
 	overflow-x: hidden;
