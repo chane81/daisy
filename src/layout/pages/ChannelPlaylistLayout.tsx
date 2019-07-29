@@ -4,8 +4,12 @@ import { device } from '../../library/styleHelper';
 import MasterLayout from '../Common/MasterLayout';
 import { observer } from 'mobx-react';
 import PlayItemListCard from '../../components/Cards/PlayItemListCard';
-import { IApiChannelInfoModelType } from '../../stores/storeTypes';
+import {
+	IApiChannelInfoModelType,
+	IPlayerModelType
+} from '../../stores/storeTypes';
 import commonHelper from '../../library/commonHelper';
+import YoutubePlayer from '../../components/Player/YoutubePlayer';
 
 /**
  * 설명:									채널리스트 page 의 presentation 컴포넌트
@@ -15,6 +19,8 @@ interface IProps {
 	className?: string;
 	apiChannelInfo?: IApiChannelInfoModelType;
 	leftMenuVisible: boolean;
+	playerOptions: IPlayerModelType;
+	handlePlayerReady: (e: any) => void;
 	handleThumbnailClick: (
 		videoId: string,
 		title: string,
@@ -82,9 +88,16 @@ const ChannelPlaylistLayout: React.FC<IProps> = props => {
 						</div>
 					</div>
 				</div>
+				<YoutubePlayer
+					className='youtube-player'
+					playerOptions={props.playerOptions}
+					handleReady={props.handlePlayerReady}
+					leftMenuVisible={props.leftMenuVisible}
+				></YoutubePlayer>
 				<PlayItemListCard
 					apiItems={playList}
 					leftMenuVisible={props.leftMenuVisible}
+					handleThumbnailClick={props.handleThumbnailClick}
 				></PlayItemListCard>
 			</ChannelPlaylistLayoutWrapper>
 		</MasterLayout>
