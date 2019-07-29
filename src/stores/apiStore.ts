@@ -60,8 +60,6 @@ const model = types
 					playList: promiseResult[1]
 				};
 
-				console.log('channelInfo:', self.channelInfo);
-
 				self.status.setStatus('success');
 			} catch (err) {
 				self.status.setError(err);
