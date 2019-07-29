@@ -2,9 +2,8 @@ import { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { IStore } from '../src/stores/storeTypes';
 import ChannelPlaylistLayout from '../src/layout/pages/ChannelPlaylistLayout';
-import { Router, withRouter } from '../src/library/routerHelper';
-import apiChannelStore from '../src/stores/apiChanneInfoStore';
-import apiItemsStore from '../src/stores/apiItemsStore';
+import { withRouter } from '../src/library/routerHelper';
+import Loading from '../src/components/Etc/Loading';
 
 /**
  * 설명:	채널리스트 page
@@ -36,14 +35,46 @@ class ChannelPlaylist extends Component<IProps> {
 		title: string,
 		channelId: string
 	) => {
-		console.log('channelId:', channelId);
+		console.log('video ID:', videoId);
+		console.log('title:', title);
+
+		const { playerModel } = this.props.store!;
+
+		playerModel.setPlayer({ videoId, title });
+		playerModel.setPlay();
+	};
+
+	// 유튜브 플레이어 onReady 핸들러
+	public handlePlayerReady = e => {
+		const { playerModel, apiModel } = this.props.store!;
+
+		if (playerModel) {
+			let { videoId, title } = playerModel;
+			const { playList } = apiModel.channelInfo;
+
+			// 디폴트 데이터 바인딩
+			if (!!!videoId && playList.length > 0) {
+				videoId = playList[0].tracks[0].videoId;
+				title = playList[0].tracks[0].title;
+			}
+
+			// 디폴트 videoId 세팅
+			playerModel.setPlayer({
+				player: e.target,
+				videoId,
+				title
+			});
+
+			playerModel.setStop();
+		}
 	};
 
 	public render() {
-		const { apiModel, uiModel } = this.props.store!;
+		const { apiModel, uiModel, playerModel } = this.props.store!;
 
 		if (apiModel.status.now === 'pending') {
-			return <div>pending...</div>;
+			// return <div>pending...</div>;
+			return <Loading />;
 		}
 
 		return (
@@ -52,6 +83,8 @@ class ChannelPlaylist extends Component<IProps> {
 					handleThumbnailClick={this.handleThumbnailClick}
 					apiChannelInfo={apiModel.channelInfo}
 					leftMenuVisible={uiModel.leftMenuVisible}
+					playerOptions={playerModel}
+					handlePlayerReady={this.handlePlayerReady}
 				/>
 			</div>
 		);
