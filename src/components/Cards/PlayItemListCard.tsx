@@ -10,7 +10,7 @@ import {
 } from '../../stores/storeTypes';
 
 /**
- * 설명:						썸네일 카드
+ * 설명:						플레이 아이템 리스트 카드
  * className:				css class 명
  */
 interface IProps {
@@ -22,6 +22,45 @@ interface IProps {
 const PlayItemListCardWrapper = styled('div')<IProps>`
 	width: ${(props: IProps) =>
 		props.leftMenuVisible ? 'calc(100vw - 11.5rem)' : '100vw'};
+
+	overflow-y: auto;
+	overflow-x: hidden;
+	background-color: #f8f9fa;
+
+	.play-list {
+		margin-bottom: 4rem;
+	}
+
+	.title {
+		margin: 0.8rem 0 0.3rem 0;
+
+		span {
+			/* border-bottom: 15px solid red; */
+			box-shadow: inset 0 -11px 0 #f783ac;
+			color: #343a40;
+			font-weight: 600;
+			font-size: 1.3rem;
+			font-family: 'TmonMonsori', sans-serif;
+		}
+	}
+
+	/* scroll 바 */
+	overflow-y: auto;
+	::-webkit-scrollbar-thumb {
+		background-color: #ced4da;
+		border-radius: 8px;
+		-webkit-border-radius: 8px;
+		-moz-border-radius: 8px;
+		-ms-border-radius: 8px;
+		-o-border-radius: 8px;
+	}
+	&::-webkit-scrollbar {
+		width: 8px;
+	}
+	&::-webkit-scrollbar-track {
+		background: #f8f9fa;
+	}
+	/* scroll 바 */
 
 	.slick-slide,
 	.thumbnail-card {
@@ -39,6 +78,7 @@ const PlayItemListCardWrapper = styled('div')<IProps>`
 
 	@media ${device.mobile} {
 		.thumbnail-card {
+			border: 0.7px solid #adb5bd;
 			img {
 				width: 100%;
 			}
@@ -48,8 +88,8 @@ const PlayItemListCardWrapper = styled('div')<IProps>`
 
 const PlayItemListCard: React.FC<IProps> = props => {
 	const sliderSettings = {
-		dots: false,
-		arrows: false,
+		dots: true,
+		arrows: true,
 		infinite: false,
 		slidesToShow: 3,
 		slidesToScroll: 3,
@@ -67,17 +107,27 @@ const PlayItemListCard: React.FC<IProps> = props => {
 		]
 	};
 
+	const imageBind = (track: IApiItemsModelType) => {
+		const imageUrl = !!track.thumbnails!
+			? track.thumbnails!.medium!.url
+			: '';
+
+		return imageUrl;
+	};
+
 	return (
 		<PlayItemListCardWrapper {...props}>
 			{props.apiItems!.map((data, index) => (
-				<div key={data.id}>
-					<div>{data.title}</div>
+				<div className='play-list' key={data.id}>
+					<div className='title'>
+						<span>{data.title}</span>
+					</div>
 					<div className='slider'>
 						<Slider {...sliderSettings}>
 							{data.tracks.map(track => (
 								<ThumbnailCard
 									key={track.id}
-									imageUrl={track.thumbnails!.medium!.url}
+									imageUrl={imageBind(track)}
 									width='11rem'
 									height='13.5rem'
 									title={track.title}
