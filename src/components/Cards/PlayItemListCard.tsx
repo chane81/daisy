@@ -17,6 +17,11 @@ interface IProps {
 	className?: string;
 	apiItems?: IApiTrackListModelType[];
 	leftMenuVisible?: boolean;
+	handleThumbnailClick: (
+		videoId: string,
+		title: string,
+		channelId: string
+	) => void;
 }
 
 const PlayItemListCardWrapper = styled('div')<IProps>`
@@ -127,11 +132,13 @@ const PlayItemListCard: React.FC<IProps> = props => {
 							{data.tracks.map(track => (
 								<ThumbnailCard
 									key={track.id}
+									videoId={track.videoId}
 									imageUrl={imageBind(track)}
 									width='11rem'
 									height='13.5rem'
 									title={track.title}
 									className='thumbnail-card'
+									handleClick={props.handleThumbnailClick}
 								></ThumbnailCard>
 							))}
 						</Slider>
