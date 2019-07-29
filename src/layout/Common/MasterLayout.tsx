@@ -16,6 +16,7 @@ const MasterWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	min-height: 115px;
+	overflow-x: hidden;
 
 	.body-area {
 		display: flex;
