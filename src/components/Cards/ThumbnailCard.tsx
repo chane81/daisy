@@ -37,6 +37,8 @@ const ThumbnailCardWrapper = styled('div')<IProps>`
 	height: ${(props: IProps) => props.height};
 	flex: 1 1 ${(props: IProps) => props.flexBasis};
 	box-sizing: border-box;
+	border: 1px solid #ced4da;
+	cursor: pointer;
 
 	@media ${device.desktop + ',' + device.tablet} {
 		margin: 0 0.25rem 0.5rem 0.25rem;
@@ -61,9 +63,6 @@ const ThumbnailCardWrapper = styled('div')<IProps>`
 			height: 7rem;
 		}
 	}
-
-	border: 0.7px solid #ced4da;
-	cursor: pointer;
 
 	&:hover {
 		background-color: #ffffff;
@@ -90,7 +89,9 @@ const ThumbnailCard: React.FC<IProps> = props => {
 				props.handleClick!(props.videoId!, props.title!, props.channelId!)
 			}
 		>
-			<img src={props.imageUrl} />
+			<div>
+				<img src={props.imageUrl} />
+			</div>
 			<div
 				className='title'
 				dangerouslySetInnerHTML={{ __html: props.title! }}
