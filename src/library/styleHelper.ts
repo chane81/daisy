@@ -10,6 +10,7 @@
 */
 
 export const device = {
+	small: `(max-width: 319px)`,
 	mobile: `(max-width: 767px)`,
 	tablet: `(max-width: 1023px)`,
 	desktop: `(min-width: 1024px)`
