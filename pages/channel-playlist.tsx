@@ -38,10 +38,21 @@ class ChannelPlaylist extends Component<IProps> {
 		console.log('video ID:', videoId);
 		console.log('title:', title);
 
-		const { playerModel } = this.props.store!;
+		const { playerModel, uiModel } = this.props.store!;
 
+		// 플레이어 재생
 		playerModel.setPlayer({ videoId, title });
 		playerModel.setPlay();
+
+		// 레이어 보여주기
+		uiModel.setLayerToggle();
+	};
+
+	// 레이어가 닫혔을 때 유튜브재생 정지
+	public handleLayerClose = () => {
+		const { playerModel } = this.props.store!;
+
+		playerModel.setStop();
 	};
 
 	// 유튜브 플레이어 onReady 핸들러
@@ -85,6 +96,7 @@ class ChannelPlaylist extends Component<IProps> {
 					leftMenuVisible={uiModel.leftMenuVisible}
 					playerOptions={playerModel}
 					handlePlayerReady={this.handlePlayerReady}
+					handleLayerClose={this.handleLayerClose}
 				/>
 			</div>
 		);

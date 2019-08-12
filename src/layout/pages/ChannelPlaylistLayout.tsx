@@ -10,6 +10,7 @@ import {
 } from '../../stores/storeTypes';
 import commonHelper from '../../library/commonHelper';
 import YoutubePlayer from '../../components/Player/YoutubePlayer';
+import LayerContainer from '../../containers/Common/LayerContainer';
 
 /**
  * 설명:									채널리스트 page 의 presentation 컴포넌트
@@ -26,12 +27,37 @@ interface IProps {
 		title: string,
 		channelId: string
 	) => void;
+	handleLayerClose: () => void;
 }
 
 const ChannelPlaylistLayoutWrapper = styled('div')`
 	display: flex;
 	flex-flow: column nowrap;
 	height: calc(100vh - 50px);
+
+	@media ${device.mobile} {
+		.channel-header-info {
+			.channel-image {
+				width: 4rem;
+				height: 4rem;
+				background-size: 4rem;
+			}
+			.channel-desc {
+				font-size: 1.5rem;
+			}
+		}
+	}
+
+	@media ${device.desktop + ',' + device.tablet} {
+		.channel-image {
+			width: 5rem;
+			height: 5rem;
+			background-size: 5rem;
+		}
+		.channel-desc {
+			font-size: 2rem;
+		}
+	}
 
 	.channel-header-info {
 		display: flex;
@@ -40,7 +66,6 @@ const ChannelPlaylistLayoutWrapper = styled('div')`
 		align-items: center;
 		min-height: 8rem;
 		font-family: 'TmonMonsori', sans-serif;
-		font-size: 2rem;
 		font-weight: 100;
 		background-color: #e9ecef;
 
@@ -52,13 +77,10 @@ const ChannelPlaylistLayoutWrapper = styled('div')`
 			margin-left: 1rem;
 			border: 2px solid #f8f9fa;
 			border-radius: 50%;
-			width: 5rem;
-			height: 5rem;
 			display: flex;
 			flex-flow: column;
 			justify-content: center;
 			align-items: center;
-			background-size: 5rem;
 			box-shadow: 0 10px 10px rgba(0, 0, 0, 0.14),
 				0 10px 10px rgba(0, 0, 0, 0.14);
 
@@ -88,17 +110,25 @@ const ChannelPlaylistLayout: React.FC<IProps> = props => {
 						</div>
 					</div>
 				</div>
-				<YoutubePlayer
+				{/* <YoutubePlayer
 					className='youtube-player'
 					playerOptions={props.playerOptions}
 					handleReady={props.handlePlayerReady}
 					leftMenuVisible={props.leftMenuVisible}
-				></YoutubePlayer>
+				></YoutubePlayer> */}
 				<PlayItemListCard
 					apiItems={playList}
 					leftMenuVisible={props.leftMenuVisible}
 					handleThumbnailClick={props.handleThumbnailClick}
 				></PlayItemListCard>
+				<LayerContainer handleLayerClose={props.handleLayerClose}>
+					<YoutubePlayer
+						className='youtube-player'
+						playerOptions={props.playerOptions}
+						handleReady={props.handlePlayerReady}
+						leftMenuVisible={props.leftMenuVisible}
+					></YoutubePlayer>
+				</LayerContainer>
 			</ChannelPlaylistLayoutWrapper>
 		</MasterLayout>
 	);
