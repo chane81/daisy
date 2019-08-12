@@ -87,6 +87,9 @@ const PlayItemListCardWrapper = styled('div')<IProps>`
 			img {
 				width: 100%;
 			}
+			.title {
+				font-size: 0.8rem;
+			}
 		}
 	}
 `;
