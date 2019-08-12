@@ -7,18 +7,25 @@ const model = types
 		identifier: types.optional(types.identifier, 'uiModel'),
 
 		/** 레프트메뉴 Visible true/false  */
-		leftMenuVisible: types.boolean
+		leftMenuVisible: types.boolean,
+
+		/** 레이어 Visible true/false */
+		layerVisible: types.boolean
 	})
 	.actions(self => ({
 		/** 레프트메뉴 visible 정보 토글 set */
 		setLeftMenuToggle() {
 			self.leftMenuVisible = !self.leftMenuVisible;
+		},
+		setLayerToggle() {
+			self.layerVisible = !self.layerVisible;
 		}
 	}));
 
 const defaultValue = {
 	identifier: 'uiModel',
-	leftMenuVisible: true
+	leftMenuVisible: true,
+	layerVisible: false
 };
 
 const create = model.create(defaultValue);
