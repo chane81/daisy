@@ -7,6 +7,7 @@ import { object } from 'prop-types';
 import React from 'react';
 import Head from '../src/components/Common/Head';
 import { initializeStore, IStore } from '../src/stores/store';
+import Router from 'next/router';
 
 interface IProps {
 	isServer: boolean;
@@ -14,6 +15,22 @@ interface IProps {
 	Component: NextComponentType;
 	pageProps: any;
 	router: any;
+}
+
+// 개발모드에서 라우팅이 이루어진 후 페이지에서 sass 파일 import 했을 시에
+// 스타일이 적용되지 않는 부분을 아래의 로직으로 해결
+if (process.env.NODE_ENV !== 'production') {
+	Router.events.on('routeChangeComplete', () => {
+		const path = '/_next/static/css/styles.chunk.css';
+		const chunksNodes = document.querySelectorAll(
+			`link[href*="${path}"]:not([rel=preload])`
+		);
+		if (chunksNodes.length) {
+			const timestamp = new Date().valueOf();
+			console.log('chunksNodes:', chunksNodes[0]);
+			chunksNodes[0].setAttribute('href', `${path}?ts=${timestamp}`);
+		}
+	});
 }
 
 export default class MyApp extends App<IProps> {
