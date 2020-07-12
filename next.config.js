@@ -24,7 +24,7 @@ module.exports = withPlugins([
   }]
 ], {
   // 빌드 디렉토리 설정
-  distDir: 'build',
+  distDir: '.next',
 
   // 웹팩 설정
   webpack: (config, options) => {
@@ -41,7 +41,7 @@ module.exports = withPlugins([
 
     // 옵션정보 확인
     console.log('isServer:', options);
-    
+
     // 코드 난독화/압축화
     if (!options.dev && !options.isServer) {
       config.optimization.minimizer = [new TerserPlugin({
