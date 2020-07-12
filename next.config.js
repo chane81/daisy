@@ -24,7 +24,7 @@ module.exports = withPlugins([
   }]
 ], {
   // 빌드 디렉토리 설정
-  distDir: '.next',
+  //distDir: '.next',
 
   // 웹팩 설정
   webpack: (config, options) => {

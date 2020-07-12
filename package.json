@@ -49,7 +49,7 @@
 		"react-dom": "^16.8.3",
 		"react-slick": "^0.24.0",
 		"react-youtube": "^7.9.0",
-		"rimraf": "^2.6.3",
+		"rimraf": "^3.0.2",
 		"rollup-plugin-alias": "^1.5.2",
 		"slick-carousel": "^1.8.1",
 		"styled-components": "^4.3.1",
