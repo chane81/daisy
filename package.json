@@ -11,6 +11,7 @@
 		"####### product mode": "",
 		"build": "yarn clean && next build && next export -o dist",
 		"start": "cross-env NODE_ENV=production node server.js",
+		"export": "yarn build && next export",
 		"clean": "rimraf dist/* .next/* build/*",
 		"heroku-postbuild": "yarn build"
 	},
@@ -82,10 +83,7 @@
 		"webpack-cli": "^3.3.4"
 	},
 	"babel": {
-		"presets": [
-			"next/babel",
-			"@zeit/next-typescript/babel"
-		],
+		"presets": [ "next/babel", "@zeit/next-typescript/babel" ],
 		"plugins": [
 			[
 				"@babel/plugin-proposal-decorators",
@@ -111,11 +109,7 @@
 	},
 	"jest": {
 		"verbose": true,
-		"moduleFileExtensions": [
-			"ts",
-			"tsx",
-			"js"
-		],
+		"moduleFileExtensions": [ "ts", "tsx", "js" ],
 		"globals": {
 			"ts-jest": {
 				"babelConfig": true
@@ -130,8 +124,6 @@
 			"<rootDir>/node_modules/"
 		],
 		"snapshotResolver": "<rootDir>/config/snapshotResolver.js",
-		"setupFiles": [
-			"<rootDir>/config/jest.setup.js"
-		]
+		"setupFiles": [ "<rootDir>/config/jest.setup.js" ]
 	}
 }
